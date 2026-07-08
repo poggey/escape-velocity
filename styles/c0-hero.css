@@ -1,0 +1,18 @@
+/* C0 · HERO — full-viewport dark opener. Headline over the IMG-01 backdrop. */
+.c0 { min-height: 100vh; display: flex; align-items: flex-end; padding-bottom: 12vh; }
+
+.c0__headline {
+  font-size: var(--size-h1);
+  margin: 28px 0 20px;
+}
+
+/* Each headline line sits in its own block so the mask-reveal clips per line */
+.c0 .mask-line { display: block; }
+
+.c0__sub { color: var(--muted); max-width: 46ch; }
+
+.c0__cue {
+  color: var(--muted);
+  margin-top: 8vh;
+  display: inline-block;
+}

@@ -1,0 +1,99 @@
+{
+  "source": "the-offering-whitepaper.md Part I (verified against the §16 source register)",
+  "as_of": "2026-07-08",
+
+  "ipo": {
+    "price": 135,
+    "shares": 555555555,
+    "shares_m": 555.6,
+    "raise_bn": 75,
+    "greenshoe_shares_m": 83.3,
+    "greenshoe_bn": 11.2,
+    "total_proceeds_bn": 86,
+    "valuation_tn": 1.77,
+    "fees_bn": 0.5,
+    "fee_pct_cap": 0.75,
+    "banks": 21,
+    "retail_pct": 30,
+    "retail_bn": 22.5,
+    "order_book_bn": 250,
+    "oversubscription_high": "3.3–4×",
+    "oversubscription_low": "2×",
+    "index_days": 15
+  },
+
+  "convention": {
+    "fee_range": "4–7%",
+    "retail_range": "5–10%",
+    "lockup_days": "90–180",
+    "greenshoe_pct": 15,
+    "pop_range": "10–30%"
+  },
+
+  "day_one": {
+    "date": "2026-06-12",
+    "open": 150,
+    "open_gain_pct": 11.1,
+    "close": 160.95,
+    "after_hours": 166.76,
+    "gain_pct": 19.2,
+    "market_cap_tn": 2.1,
+    "shares_traded_m": 500,
+    "dollar_volume_bn": 33,
+    "money_left_bn": 14.4
+  },
+
+  "aftermath": {
+    "peak": 225.64,
+    "peak_gain_pct": 67,
+    "drawdown_pct": -32,
+    "price_jul8": 149.5,
+    "gain_since_ipo_pct": 11,
+    "float_ipo_pct": 4,
+    "float_dec_pct": 40,
+    "ndx_date": "2026-07-07",
+    "ndx_inflows_bn": 4.3,
+    "unlock_trigger_price": 175.5,
+    "unlock_trigger_deadline": "2026-08-03",
+    "unlock_trigger_shares_m": 456,
+    "earnings_date": "2026-08-06",
+    "capital_needs_bn_yr": 84
+  },
+
+  "valuation": {
+    "revenue_2025_bn": 18.7,
+    "op_loss_2025_bn": 4.2,
+    "q1_2026_net_loss_bn": 4.28,
+    "ebitda_2025_bn": 6.6,
+    "ev_ebitda_multiple": 94,
+    "megacap_multiple_low": 15,
+    "megacap_multiple_high": 40,
+    "tam_tn": 28.5,
+    "tam_ai_pct": 90,
+    "morningstar_fv": 63,
+    "street_avg_high": 236,
+    "street_avg_low": 188,
+    "target_min": 62,
+    "target_max": 800,
+    "prior_valuation_bn": 400,
+    "smallest_tn_peer_revenue_bn": 58
+  },
+
+  "engines": {
+    "starlink_rev_bn": 11.4,
+    "starlink_margin": "60%+",
+    "starlink_subs_m": 10,
+    "starlink_subs_2026_m": 17,
+    "xai_loss_qtr_bn": -2.5,
+    "ai_spend_2025_bn": 12.7,
+    "space_spend_2025_bn": 3.8,
+    "anthropic_deal_bn_month": 1.25
+  },
+
+  "governance": {
+    "musk_equity_pct": 42,
+    "musk_voting_pct": "82–85%",
+    "mars_grant_shares_bn": 1,
+    "musk_lockup_days": 366
+  }
+}

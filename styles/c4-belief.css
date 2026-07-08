@@ -1,0 +1,8 @@
+/* C4 · THE PRICE OF BELIEF — monumental stat sequence, one viewport per number. */
+.c4 .monument .caption { color: var(--muted); max-width: 44ch; }
+.c4 .monument .mono { color: var(--muted); }
+
+/* The $63 vs $236 duel: two numerals side by side */
+.c4__duel { display: flex; gap: 8vw; flex-wrap: wrap; align-items: baseline; }
+.c4__duel .numeral { font-size: clamp(72px, 10vw, 160px); }
+.c4__duel figcaption { margin-top: 8px; }

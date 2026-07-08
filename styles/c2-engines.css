@@ -1,0 +1,17 @@
+/* C2 · THREE ENGINES — three columns of oversized numerals over IMG-02. */
+.c2__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 88px;
+}
+@media (max-width: 960px) { .c2__cols { grid-template-columns: 1fr; } }
+
+.c2 .engine { border-top: 1px solid var(--hairline-d); padding-top: 24px; }
+
+/* Engine numerals are smaller than monument numerals — three share a row */
+.c2 .engine .numeral { font-size: clamp(48px, 5.4vw, 88px); }
+
+.engine__caption { color: var(--muted); font-size: 15px; max-width: 34ch; margin-top: 12px; }
+
+.c2__group { margin-top: 88px; color: var(--muted); }

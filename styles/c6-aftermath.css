@@ -1,0 +1,19 @@
+/* C6 · THE AFTERMATH — two charts as artworks: daily series, then the supply cliff. */
+.c6 figure { margin: 96px 0; }
+.c6 figcaption { margin-top: 20px; color: var(--muted); font-size: 14px; max-width: 70ch; }
+
+.c6 .chart { width: 100%; height: auto; }
+.c6 .chart .line { stroke: var(--ink); stroke-width: 2; fill: none; }
+.c6 .chart .drawdown-area { fill: var(--loss); opacity: 0.08; }
+.c6 .chart .trigger-line { stroke: var(--loss); stroke-width: 1; stroke-dasharray: 4 6; }
+.c6 .chart .flag { stroke: var(--muted); stroke-width: 1; }
+.c6 .chart .bar { fill: var(--surface); stroke: var(--hairline-l); }
+.c6 .chart .bar--known { fill: var(--ink); }
+
+/* "Was +19% hot?" mini-ranking of famous first-day pops */
+.c6__pops { display: grid; gap: 10px; max-width: 620px; margin-top: 40px; }
+.pop-row { display: grid; grid-template-columns: 110px 1fr 60px; gap: 16px; align-items: center; }
+.pop-row .bar { height: 8px; background: var(--surface); border: 1px solid var(--hairline-l); transform-origin: left; }
+.pop-row--spcx .bar { background: var(--gain); border-color: var(--gain); }
+.pop-row .mono { color: var(--muted); }
+.pop-row--spcx .mono { color: var(--ink); }

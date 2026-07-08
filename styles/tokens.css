@@ -1,0 +1,43 @@
+/* ============================================================
+   TOKENS — "Telemetry" design system (whitepaper §12).
+   The ONLY file in the project allowed to contain literal colour
+   values (§14.6). Change a value here and it changes everywhere.
+   ============================================================ */
+:root {
+  /* ---- colour (exactly the §12 palette, no others) ---- */
+  --black:      #0A0A0C;                 /* space black — dark chapter background */
+  --panel:      #121318;                 /* elevated dark surfaces */
+  --white:      #FAFAF7;                 /* gallery white — light chapter background */
+  --surface:    #F0F0EC;                 /* recessed light panels, table stripes */
+  --ink:        #16171B;                 /* text on light */
+  --paper-txt:  #F2F2EF;                 /* text on dark */
+  --muted:      #8A8D96;                 /* captions, labels, both registers */
+  --hairline-d: rgba(250, 250, 247, .14);
+  --hairline-l: rgba(22, 23, 27, .12);
+  --gain:       #1E9E63;                 /* market green — data only */
+  --loss:       #E5484D;                 /* market red — data only */
+
+  /* ---- typography ---- */
+  --font-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+  --display-tracking: -0.03em;           /* §12: headline tracking */
+  --display-leading:  0.95;              /* §12: headline line-height */
+  --size-body:    17px;
+  --leading-body: 1.7;
+  --size-numeral: clamp(96px, 14vw, 220px);  /* §12: oversized numerals — the signature */
+  --size-h1:      clamp(56px, 9vw, 140px);
+  --size-h2:      clamp(36px, 5.5vw, 80px);
+  --size-h3:      clamp(19px, 2vw, 26px);
+  --size-label:   12px;
+  --tracking-label: 0.16em;
+
+  /* ---- layout ---- */
+  --section-pad: clamp(96px, 13vw, 208px);   /* §12: ≥160px on desktop */
+  --content-max: 1280px;
+  --gutter:      clamp(20px, 4vw, 56px);
+
+  /* ---- motion (CSS side; GSAP uses expo.out) ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

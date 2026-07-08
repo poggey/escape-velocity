@@ -1,0 +1,14 @@
+/* INTERLUDES — full-bleed 21:9 image moments with one pull-quote. Pacing beats. */
+.interlude { position: relative; padding: 0; overflow: hidden; }
+
+.interlude .media--wide { position: relative; }
+.interlude .media--wide .img-placeholder { aspect-ratio: 21 / 9; }
+.interlude .media--wide img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+
+.interlude .container {
+  position: absolute; inset: 0;
+  display: flex; align-items: center;
+  left: 0; right: 0;
+}
+.interlude .pull-quote { color: var(--paper-txt); }
+.interlude cite { display: block; margin-top: 20px; font-style: normal; }

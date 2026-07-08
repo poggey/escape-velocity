@@ -1,0 +1,54 @@
+{
+  "source": "ESTIMATES hand-built from reported lockup terms (whitepaper \u00a76, \u00a79): 4% float at IPO; first wave ~20% of insider holdings after 6 Aug earnings; $175.50/3 Aug trigger would add ~456m shares; ~40% tradable by December; Musk locked 366 days. Intermediate points are interpolations \u2014 label as estimates wherever shown.",
+  "as_of": "2026-07-08",
+  "is_estimate": true,
+  "trigger": {
+    "price": 175.5,
+    "deadline": "2026-08-03",
+    "shares_m": 456
+  },
+  "points": [
+    {
+      "month": "JUN",
+      "date": "2026-06-12",
+      "float_pct": 4,
+      "note": "IPO \u2014 deliberately thin"
+    },
+    {
+      "month": "JUL",
+      "date": "2026-07-31",
+      "float_pct": 4,
+      "note": "pre-earnings lockup holds"
+    },
+    {
+      "month": "AUG",
+      "date": "2026-08-31",
+      "float_pct": 12,
+      "note": "first wave after 6 Aug earnings (est.)"
+    },
+    {
+      "month": "SEP",
+      "date": "2026-09-30",
+      "float_pct": 18,
+      "note": "est."
+    },
+    {
+      "month": "OCT",
+      "date": "2026-10-31",
+      "float_pct": 25,
+      "note": "est."
+    },
+    {
+      "month": "NOV",
+      "date": "2026-11-30",
+      "float_pct": 32,
+      "note": "est."
+    },
+    {
+      "month": "DEC",
+      "date": "2026-12-31",
+      "float_pct": 40,
+      "note": "reported projection ~40%"
+    }
+  ]
+}

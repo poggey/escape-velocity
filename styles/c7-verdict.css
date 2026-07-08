@@ -1,0 +1,27 @@
+/* C7 · THE VERDICT — six-constituency ledger over IMG-06, then the thesis line. */
+.c7 .rule-table { margin-top: 72px; }
+.c7 .rule-table td { font-size: 15px; }
+.c7 td.constituency { font-family: var(--font-display); font-weight: 500; font-size: 18px; width: 26%; }
+.c7 td.verdict-word { width: 20%; }
+.c7 td.verdict-word .mono { color: var(--paper-txt); }
+.c7 td.evidence { color: var(--muted); }
+
+.c7__thesis {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+.c7__thesis p {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--size-h2);
+  letter-spacing: var(--display-tracking);
+  line-height: 1.05;
+  max-width: 16ch;
+}
+.c7__thesis .mask-line { display: block; }
+
+@media (max-width: 720px) {
+  .c7 tr { display: block; padding: 16px 0; border-bottom: 1px solid var(--hairline-d); }
+  .c7 .rule-table td { display: block; width: auto !important; border: 0; padding: 3px 0; }
+}

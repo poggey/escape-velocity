@@ -1,0 +1,5 @@
+# /analysis — run: pip install -r requirements.txt && jupyter lab
+yfinance>=0.2.40
+pandas>=2.0
+matplotlib>=3.8
+jupyterlab>=4.0

@@ -1,0 +1,106 @@
+/* ============================================================
+   COMPONENTS — shared pieces used by more than one chapter:
+   numerals, media/placeholders, tables, quotes, progress meter.
+   Chapter-specific styling lives in the per-chapter css files.
+   ============================================================ */
+
+/* ---- oversized numerals (§12: the signature) ---- */
+.numeral {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--size-numeral);
+  letter-spacing: var(--display-tracking);
+  line-height: var(--display-leading);
+  font-variant-numeric: tabular-nums;
+}
+.numeral--gain { color: var(--gain); }
+.numeral--loss { color: var(--loss); }
+.numeral__unit { font-size: 0.35em; color: var(--muted); }
+
+/* A full viewport given to one number and one sentence (§12) */
+.monument {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* ---- media & image placeholders ---- */
+/* .media--cover: full-bleed chapter backdrop, sits behind .container.
+   Extends 6% past top/bottom so the GSAP parallax never shows a gap. */
+.media--cover { position: absolute; inset: -6% 0; overflow: hidden; z-index: 0; }
+.media--cover > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.media--cover img { object-fit: cover; }
+
+.img-placeholder {
+  background: var(--panel);
+  border: 1px solid var(--hairline-d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.img-placeholder .mono { color: var(--muted); padding: 16px; text-align: center; }
+
+/* Dark chapters keep text readable over (future) imagery */
+.chapter--dark .scrim {
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(180deg, var(--black) 0%, transparent 30%, transparent 70%, var(--black) 100%);
+  opacity: 0.85;
+}
+
+/* ---- hairline tables (C3 comparison, C7 ledger, C8 sources) ---- */
+.rule-table { width: 100%; border-collapse: collapse; }
+.rule-table th, .rule-table td {
+  text-align: left;
+  padding: 24px 24px 24px 0;
+  border-bottom: 1px solid var(--hairline-l);
+  vertical-align: top;
+}
+.chapter--dark .rule-table th, .chapter--dark .rule-table td { border-color: var(--hairline-d); }
+.rule-table th { color: var(--muted); font-weight: 500; }
+
+/* ---- pull quotes on the interludes ---- */
+.pull-quote {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(28px, 4.5vw, 64px);
+  letter-spacing: var(--display-tracking);
+  line-height: 1.1;
+  max-width: 20ch;
+}
+
+/* ---- progress meter (§12): fixed 1px line with chapter ticks ---- */
+.progress {
+  position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
+  height: 56vh; width: 1px;
+  background: var(--hairline-d);
+  z-index: 50;
+  mix-blend-mode: difference;   /* stays visible over both registers */
+}
+.progress__fill {
+  position: absolute; inset: 0;
+  background: var(--paper-txt);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+.progress__tick {
+  position: absolute; left: -3px; width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  transform: translateY(-50%);
+}
+@media (max-width: 720px) { .progress { display: none; } }
+
+/* ---- annotation strips under charts ---- */
+.annotations { display: flex; flex-wrap: wrap; gap: 12px 40px; margin-top: 32px; }
+.annotations .mono { color: var(--muted); letter-spacing: 0.08em; text-transform: none; }
+
+/* ---- chart svg text ---- */
+.chart text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  fill: var(--muted);
+}

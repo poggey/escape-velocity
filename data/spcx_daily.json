@@ -1,0 +1,145 @@
+{
+  "source": "STUB \u2014 hand-shaped to reported anchors in the-offering-whitepaper.md \u00a75\u20136. Run /analysis/escape-velocity-analysis.ipynb to replace with live yfinance data.",
+  "as_of": "2026-07-08",
+  "is_stub": true,
+  "ticker": "SPCX",
+  "ipo_price": 135,
+  "rows": [
+    {
+      "date": "2026-06-12",
+      "open": 150.0,
+      "high": 162.88,
+      "low": 148.2,
+      "close": 160.95,
+      "volume": 500000000
+    },
+    {
+      "date": "2026-06-15",
+      "open": 160.95,
+      "high": 173.25,
+      "low": 159.02,
+      "close": 171.2,
+      "volume": 210000000
+    },
+    {
+      "date": "2026-06-16",
+      "open": 171.2,
+      "high": 185.7,
+      "low": 169.15,
+      "close": 183.5,
+      "volume": 190000000
+    },
+    {
+      "date": "2026-06-17",
+      "open": 183.5,
+      "high": 198.76,
+      "low": 181.3,
+      "close": 196.4,
+      "volume": 175000000
+    },
+    {
+      "date": "2026-06-18",
+      "open": 196.4,
+      "high": 209.59,
+      "low": 194.04,
+      "close": 207.1,
+      "volume": 160000000
+    },
+    {
+      "date": "2026-06-22",
+      "open": 207.1,
+      "high": 218.9,
+      "low": 204.61,
+      "close": 216.3,
+      "volume": 140000000
+    },
+    {
+      "date": "2026-06-23",
+      "open": 216.3,
+      "high": 225.47,
+      "low": 213.7,
+      "close": 222.8,
+      "volume": 130000000
+    },
+    {
+      "date": "2026-06-24",
+      "open": 222.8,
+      "high": 228.35,
+      "low": 220.13,
+      "close": 225.64,
+      "volume": 150000000
+    },
+    {
+      "date": "2026-06-25",
+      "open": 225.64,
+      "high": 228.35,
+      "low": 212.32,
+      "close": 214.9,
+      "volume": 145000000
+    },
+    {
+      "date": "2026-06-26",
+      "open": 214.9,
+      "high": 217.48,
+      "low": 200.86,
+      "close": 203.3,
+      "volume": 130000000
+    },
+    {
+      "date": "2026-06-29",
+      "open": 203.3,
+      "high": 205.74,
+      "low": 189.45,
+      "close": 191.75,
+      "volume": 120000000
+    },
+    {
+      "date": "2026-06-30",
+      "open": 191.75,
+      "high": 194.05,
+      "low": 180.21,
+      "close": 182.4,
+      "volume": 110000000
+    },
+    {
+      "date": "2026-07-01",
+      "open": 182.4,
+      "high": 184.59,
+      "low": 170.03,
+      "close": 172.1,
+      "volume": 100000000
+    },
+    {
+      "date": "2026-07-02",
+      "open": 172.1,
+      "high": 174.17,
+      "low": 162.58,
+      "close": 164.55,
+      "volume": 90000000
+    },
+    {
+      "date": "2026-07-06",
+      "open": 164.55,
+      "high": 166.52,
+      "low": 155.31,
+      "close": 157.2,
+      "volume": 85000000
+    },
+    {
+      "date": "2026-07-07",
+      "open": 157.2,
+      "high": 159.09,
+      "low": 148.3,
+      "close": 150.1,
+      "volume": 120000000
+    },
+    {
+      "date": "2026-07-08",
+      "open": 150.1,
+      "high": 151.9,
+      "low": 147.71,
+      "close": 149.5,
+      "volume": 80000000
+    }
+  ]
+}

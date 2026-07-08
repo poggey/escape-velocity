@@ -1,0 +1,27 @@
+/* C3 · BREAKING THE PLAYBOOK — the centrepiece comparison table.
+   CONVENTION column muted; SPACEX column full ink and larger type (§13). */
+.c3 .rule-table { margin-top: 72px; }
+
+.c3 .rule-table td:first-child { width: 18%; color: var(--muted); padding-right: 32px; }
+.c3 td.convention { width: 34%; color: var(--muted); font-size: 15px; }
+.c3 td.spacex {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(19px, 2.2vw, 30px);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.c3 td.spacex .mono { display: block; margin-top: 10px; color: var(--muted); text-transform: none; letter-spacing: 0.06em; }
+
+/* The hairline GSAP draws across as each row reveals */
+.c3 .row-rule { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--ink); transform-origin: left; }
+.c3 tr { position: relative; }
+
+.c3__timeline { margin-top: 88px; display: flex; flex-wrap: wrap; gap: 10px 36px; }
+.c3__timeline .mono { color: var(--muted); }
+
+@media (max-width: 720px) {
+  .c3 tr { display: block; padding: 20px 0; }
+  .c3 .rule-table td { display: block; width: auto !important; border: 0; padding: 4px 0; }
+  .c3 tr { border-bottom: 1px solid var(--hairline-l); }
+}

@@ -1,0 +1,24 @@
+{
+  "source": "the-offering-whitepaper.md §2, §5–6",
+  "as_of": "2026-07-08",
+  "deal_timeline": [
+    { "date": "2026-02", "label": "xAI merged into SpaceX at $1.25tn" },
+    { "date": "2026-04-01", "label": "Confidential draft filed" },
+    { "date": "2026-05-04", "label": "5-for-1 stock split" },
+    { "date": "2026-05-20", "label": "S-1 made public" },
+    { "date": "2026-06-02", "label": "Underwriters named" },
+    { "date": "2026-06-03", "label": "Fixed price announced: $135" },
+    { "date": "2026-06-11", "label": "Priced — $75bn raised" },
+    { "date": "2026-06-12", "label": "First trade" }
+  ],
+  "chart_flags": [
+    { "date": "2026-06-24", "label": "PEAK $225.64 · +67%", "kind": "peak" },
+    { "date": "2026-07-07", "label": "NDX ENTRY · ~$4.3BN PASSIVE", "kind": "flag" }
+  ],
+  "upcoming": [
+    { "date": "2026-07-27", "label": "CME single-stock futures begin" },
+    { "date": "2026-08-03", "label": "$175.50 early-unlock trigger deadline (~456m shares)" },
+    { "date": "2026-08-06", "label": "First earnings; first lockup wave (~20% of insider holdings)" },
+    { "date": "2026-12-31", "label": "Tradable float approaches ~40%" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "source": "the-offering-whitepaper.md §9 (famous first-day pops); SPCX from §5",
+  "as_of": "2026-07-08",
+  "note": "Pop = first-day close vs IPO price. Years given only where the whitepaper states them.",
+  "pops": [
+    { "name": "FACEBOOK", "year": 2012, "pop_pct": 0 },
+    { "name": "ARAMCO", "year": 2019, "pop_pct": 10 },
+    { "name": "SPCX", "year": 2026, "pop_pct": 19.2, "highlight": true },
+    { "name": "ALIBABA", "year": 2014, "pop_pct": 38 },
+    { "name": "SNOWFLAKE", "year": null, "pop_pct": 112 },
+    { "name": "AIRBNB", "year": null, "pop_pct": 113 }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "source": "the-offering-whitepaper.md §0.5-R2, §6",
+  "as_of": "2026-07-08",
+  "rules": "prediction_made dates are IMMUTABLE once written. When an event resolves, append outcome + outcome_date; never edit the original prediction or its date.",
+  "items": [
+    {
+      "event": "CME lists single-stock futures on SPCX",
+      "event_date": "2026-07-27",
+      "prediction": "[PADRAIG: your expectation here — e.g. effect on volatility]",
+      "prediction_made": null,
+      "outcome": null,
+      "outcome_date": null
+    },
+    {
+      "event": "$175.50 early-unlock trigger window closes (would unlock ~456m extra shares)",
+      "event_date": "2026-08-03",
+      "prediction": "[PADRAIG: will the trigger be hit before 3 Aug? your call]",
+      "prediction_made": null,
+      "outcome": null,
+      "outcome_date": null
+    },
+    {
+      "event": "First earnings as a public company",
+      "event_date": "2026-08-06",
+      "prediction": "[PADRAIG: what you expect the print and the reaction to be]",
+      "prediction_made": null,
+      "outcome": null,
+      "outcome_date": null
+    },
+    {
+      "event": "First lockup wave — ~20% of insider holdings unlock after earnings",
+      "event_date": "2026-08-06",
+      "prediction": "[PADRAIG: how much supply actually hits the tape, and what it does to price]",
+      "prediction_made": null,
+      "outcome": null,
+      "outcome_date": null
+    },
+    {
+      "event": "Tradable float approaches ~40% of shares",
+      "event_date": "2026-12-31",
+      "prediction": "[PADRAIG: where SPCX trades once the float is real]",
+      "prediction_made": null,
+      "outcome": null,
+      "outcome_date": null
+    }
+  ]
+}

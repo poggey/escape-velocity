@@ -1,0 +1,28 @@
+{
+  "source": "the-offering-whitepaper.md §16 source register",
+  "as_of": "2026-07-08",
+  "retrieved": "2026-07-08",
+  "sources": [
+    { "outlet": "CNBC", "item": "SpaceX IPO explained", "date": "2026-06-09", "used_for": "Fixed $135 price; retail ~30% (~$22.5bn); $1.77tn; $18.7bn revenue / $4.2bn operating loss" },
+    { "outlet": "CNBC", "item": "SpaceX targets $135 IPO price", "date": "2026-06-03", "used_for": "555.6m shares / $75bn; greenshoe 83.33m (~$11.2bn); Musk >82% voting; xAI merger at $1.25tn" },
+    { "outlet": "Wikipedia", "item": "Initial public offering of SpaceX", "date": "2026-07-08", "used_for": "Fees <0.75% (~$500m); $28.5tn TAM (90% AI); Grok-subscription and anti-flipping reporting; ~$86bn raised; Nasdaq rule change" },
+    { "outlet": "NPR", "item": "Pricing & debut coverage", "date": "2026-06-11", "used_for": "Pricing confirmation; Aramco comparison; +19% close $160.95" },
+    { "outlet": "CNBC live blog", "item": "Listing day", "date": "2026-06-12", "used_for": "$150 open; $160.95 close; $166.76 after-hours; 500m+ shares; volume vs Facebook 2012" },
+    { "outlet": "Forbes live blog", "item": "Listing day", "date": "2026-06-12", "used_for": "Open mechanics; Warren letter; Morningstar $63; trillionaire" },
+    { "outlet": "Forbes", "item": "8 Things To Know", "date": "2026-06-04", "used_for": "Three-engine framing; Starlink $11.39bn 2025 revenue, 60%+ margins; 1bn-share Mars grant; ~85%/42% split" },
+    { "outlet": "BitMEX", "item": "IPO guide", "date": "2026-05", "used_for": "21-bank syndicate; $250bn demand (~3.3–4x); 5-for-1 split; Q1 loss $4.28bn; AI losses $2.5bn/q" },
+    { "outlet": "TradingView / Investing.com / Yahoo", "item": "Aftermath data", "date": "2026-07-08", "used_for": "NDX inclusion + ~$4.3bn passive; ~32% correction; ~$149–150 price; analyst targets $188.57 avg (Investing) vs ~$236 (Yahoo), range $62–$800" },
+    { "outlet": "Benzinga / Motley Fool", "item": "Lockup mechanics", "date": "2026-07-06", "used_for": "$175.50 / 3 Aug early-unlock trigger (~456m shares); float 4% → ~40% by Dec; Musk 366-day lockup" }
+  ],
+  "discrepancies": [
+    { "topic": "Oversubscription", "versions": "~3.3–4× ($250bn book vs $75bn raise, by 9 June) vs nearer 2× in some later reporting", "treatment": "Both shown in C5; neither hidden." },
+    { "topic": "Average analyst target", "versions": "$188.57 (Investing.com) vs ~$236 (Yahoo) — aggregator-dependent; individual targets ranged $62–$800", "treatment": "The C4 duel uses $236 with the $188 figure and full range noted alongside." },
+    { "topic": "Valuation vs market cap", "versions": "$1.77tn offering valuation vs ~$2.1tn day-one market cap — different share-count bases", "treatment": "The Position (C7.5) states which base its implied-growth maths uses." }
+  ],
+  "assumptions": [
+    "spcx_daily.json is STUB data shaped to the whitepaper's reported anchors (open $150, close $160.95, peak $225.64, ~$149–150 by 7–8 Jul) until the analysis notebook is run against live data.",
+    "The supply schedule between the reported endpoints (4% at IPO, ~40% by December) is an estimate interpolated from reported lockup terms — labelled as such on the chart.",
+    "The C5 intraday line connects only the four reported session anchors; no intraday path is invented between them.",
+    "Implied-growth maths uses the $1.77tn offering-valuation share base scaled by the latest price (see the valuation-vs-market-cap discrepancy above), 2025 adjusted EBITDA of $6.6bn, and a 5-year horizon to 2030."
+  ]
+}

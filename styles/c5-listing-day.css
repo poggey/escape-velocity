@@ -1,0 +1,21 @@
+/* C5 · LISTING DAY — the pinned chapter. One viewport: intraday line + live counters. */
+.c5__stage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+
+.c5__readout { display: flex; gap: 8vw; }
+.c5__readout .numeral { font-size: clamp(48px, 6vw, 96px); }
+.c5__readout .mono { color: var(--muted); }
+
+.c5 .chart { width: 100%; height: auto; }
+.c5 .chart .line { stroke: var(--gain); stroke-width: 2.5; fill: none; }
+.c5 .chart .baseline { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 6; }
+.c5 .chart .anchor { fill: var(--ink); }
+.c5 .chart .head { fill: var(--gain); }
+
+.c5__foot { display: flex; flex-wrap: wrap; gap: 10px 40px; }
+.c5__foot .mono { color: var(--muted); text-transform: none; letter-spacing: 0.06em; }

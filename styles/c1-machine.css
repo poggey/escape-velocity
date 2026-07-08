@@ -1,0 +1,28 @@
+/* C1 · THE MACHINE — five hairline step cards in a horizontal row (stack on mobile). */
+.c1__steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin: 72px 0;
+}
+@media (max-width: 960px) { .c1__steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .c1__steps { grid-template-columns: 1fr; } }
+
+.step-card { padding-top: 20px; position: relative; }
+
+/* The rule GSAP draws across the top of each card (scaleX 0 -> 1) */
+.step-card__rule {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: var(--ink);
+  transform-origin: left;
+}
+
+.step-card__num { color: var(--muted); margin-bottom: 12px; }
+.step-card h3 { margin-bottom: 10px; }
+.step-card p { font-size: 15px; color: var(--muted); }
+
+.c1__close {
+  font-size: var(--size-h2);
+  max-width: 18ch;
+  margin-top: 96px;
+}

@@ -1,0 +1,33 @@
+/* C7.5 · THE POSITION — reads as writing, not spectacle (§13). Slider + Watch panel. */
+.c75 .placeholder-text {
+  background: var(--surface);
+  border: 1px dashed var(--hairline-l);
+  padding: 20px 24px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 24px 0;
+  max-width: 62ch;
+}
+
+/* ---- implied-growth interactive ---- */
+.c75__calc { background: var(--surface); padding: 40px; margin: 64px 0; max-width: 760px; }
+.c75__calc label { display: block; margin-bottom: 20px; }
+.c75__calc input[type='range'] { width: 100%; accent-color: var(--ink); }
+.c75__readouts { display: flex; gap: 48px; flex-wrap: wrap; margin-top: 24px; }
+.c75__readouts strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 3.4vw, 48px);
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+.c75__readouts .mono { color: var(--muted); }
+.c75__basis { color: var(--muted); font-size: 13px; margin-top: 20px; max-width: 60ch; }
+
+/* ---- The Watch ---- */
+.watch { margin-top: 96px; }
+.watch-item { border-top: 1px solid var(--hairline-l); padding: 20px 0; display: grid; grid-template-columns: 120px 1fr; gap: 24px; }
+.watch-item .mono { color: var(--muted); }
+.watch-item .prediction { font-style: italic; color: var(--muted); }
+.watch-item .outcome { font-size: 14px; }
+@media (max-width: 560px) { .watch-item { grid-template-columns: 1fr; gap: 6px; } }

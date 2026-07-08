@@ -1,0 +1,77 @@
+/* ============================================================
+   BASE — reset, typography and the two chapter registers
+   (dark cinematic / light analytical, whitepaper §11).
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  background: var(--black);   /* dark by default so light chapters read as "gallery rooms" */
+  color: var(--paper-txt);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Reduced motion: no smooth scrolling; GSAP side is handled in src/lib/motion.js */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* ---- the two registers ---- */
+.chapter { position: relative; padding: var(--section-pad) 0; }
+.chapter--dark  { background: var(--black); color: var(--paper-txt); }
+.chapter--light { background: var(--white); color: var(--ink); }
+
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  position: relative;   /* sits above any full-bleed backdrop */
+  z-index: 1;
+}
+
+/* ---- type roles ---- */
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: var(--display-tracking);
+  line-height: var(--display-leading);
+}
+h2 { font-size: var(--size-h2); }
+h3 { font-size: var(--size-h3); font-weight: 500; }
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+/* Chapter label (§12 signature motif): small-caps mono + hairline to the margin */
+.label {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.label::after { content: ''; flex: 1; height: 1px; background: var(--hairline-l); }
+.chapter--dark .label::after { background: var(--hairline-d); }
+
+.lede { max-width: 62ch; color: inherit; }
+.muted { color: var(--muted); }
+
+/* Keyboard users get a visible focus ring (§14.9) */
+:focus-visible { outline: 2px solid var(--muted); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--white); color: var(--ink); padding: 8px 16px;
+}
+.skip-link:focus { left: 0; }
