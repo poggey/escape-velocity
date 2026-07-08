@@ -27,8 +27,9 @@ export function maskReveal(els, { start = 'top 80%', stagger = 0.12, trigger } =
 
 export function parallax(media, chapter) {
   if (reducedMotion || !media) return;
+  const target = media.querySelector('img') || media;
   gsap.fromTo(
-    media,
+    target,
     { yPercent: -5 },
     {
       yPercent: 5,

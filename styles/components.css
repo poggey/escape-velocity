@@ -28,10 +28,16 @@
 
 /* ---- media & image placeholders ---- */
 /* .media--cover: full-bleed chapter backdrop, sits behind .container.
-   Extends 6% past top/bottom so the GSAP parallax never shows a gap. */
-.media--cover { position: absolute; inset: -6% 0; overflow: hidden; z-index: 0; }
-.media--cover > * { position: absolute; inset: 0; width: 100%; height: 100%; }
-.media--cover img { object-fit: cover; }
+   The media sticks to the viewport inside long chapters so a 16:9 image
+   stays legible instead of being zoomed into a tall-section crop. */
+.media--cover { position: absolute; inset: 0; overflow: clip; z-index: 0; pointer-events: none; }
+.media--cover > * {
+  position: sticky;
+  top: -6vh;
+  width: 100%;
+  height: 112vh;
+}
+.media--cover img { object-fit: cover; object-position: center; }
 
 .img-placeholder {
   background: var(--panel);

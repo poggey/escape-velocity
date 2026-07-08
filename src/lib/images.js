@@ -9,12 +9,12 @@
    One line. Nothing else references image paths.
    ============================================================ */
 export const IMAGES = {
-  'IMG-01': { file: null, aspect: '16 / 9', alt: 'Stainless-steel super-heavy rocket stacked on its launch tower at pre-dawn, low fog' },
-  'IMG-02': { file: null, aspect: '16 / 9', alt: 'A train of flat satellites in low Earth orbit above the glowing limb of Earth' },
-  'IMG-03': { file: null, aspect: '16 / 9', alt: 'Grid of rocket engine nozzles seen directly from below in a dark hangar' },
-  'IMG-04': { file: null, aspect: '21 / 9', alt: 'Rocket booster descending between two tower catch-arms, motion-blurred plume' },
-  'IMG-05': { file: null, aspect: '21 / 9', alt: 'Vast dark server hall receding to a vanishing point' },
-  'IMG-06': { file: null, aspect: '16 / 9', alt: 'A city exchange tower at night displaying a rocket launch on its curved screen' },
+  'IMG-01': { file: '/images/img-01-hero.webp', aspect: '16 / 9', alt: 'Stainless-steel super-heavy rocket stacked on its launch tower at pre-dawn, low fog' },
+  'IMG-02': { file: '/images/img-02-constellation.webp', aspect: '16 / 9', alt: 'A train of flat satellites in low Earth orbit above the glowing limb of Earth' },
+  'IMG-03': { file: '/images/img-03-engines.webp', aspect: '16 / 9', alt: 'Grid of rocket engine nozzles seen directly from below in a dark hangar' },
+  'IMG-04': { file: '/images/img-04-catch.webp', aspect: '21 / 9', alt: 'Rocket booster descending between two tower catch-arms, motion-blurred plume' },
+  'IMG-05': { file: '/images/img-05-serverhall.webp', aspect: '21 / 9', alt: 'Vast dark server hall receding to a vanishing point' },
+  'IMG-06': { file: '/images/img-06-exchange.webp', aspect: '16 / 9', alt: 'A city exchange tower at night displaying a rocket launch on its curved screen' },
 };
 
 /* Fills every <div data-img="IMG-xx"> on the page.
