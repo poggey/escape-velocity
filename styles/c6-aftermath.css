@@ -1,19 +1,89 @@
-/* C6 · THE AFTERMATH — two charts as artworks: daily series, then the supply cliff. */
-.c6 figure { margin: 96px 0; }
+/* C6 · THE AFTERMATH — three exhibits: the round trip, the pop ranking,
+   the supply cliff — headlined by the summary strip. */
+
+/* the summary strip: the whole aftermath in three figures */
+.c6__summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin: 56px 0 24px;
+}
+.c6__stat { border-top: 1px solid var(--hairline-l); padding-top: 20px; }
+.c6__stat .mono { color: var(--muted); }
+.c6__summary .numeral {
+  font-size: clamp(48px, 5.4vw, 88px);
+  margin: 10px 0 6px;
+}
+.c6__stat-note { color: var(--muted); font-size: 14px; max-width: 26ch; }
+@media (max-width: 800px) {
+  .c6__summary { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.c6__exhibit { color: var(--muted); letter-spacing: 0.16em; }
+
+/* the bridge into the verdict */
+.c6__close {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--size-h2);
+  letter-spacing: var(--display-tracking);
+  line-height: 1.05;
+  max-width: 18ch;
+  margin-top: 96px;
+}
+.c6__close .mask-line { display: block; }
+
+.c6 figure { margin: 72px 0; }
+.c6 figure h3, .c6__pops-block h3 { margin-bottom: 14px; display: flex; align-items: center; gap: 14px; }
+/* each instrument carries the dawn tick — same motif as the chapter labels */
+.c6 figure h3::before, .c6__pops-block h3::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--accent);
+  flex: none;
+}
+.c6 figure .lede { margin-bottom: 36px; font-size: 15px; color: var(--muted); }
 .c6 figcaption { margin-top: 20px; color: var(--muted); font-size: 14px; max-width: 70ch; }
 
 .c6 .chart { width: 100%; height: auto; }
-.c6 .chart .line { stroke: var(--ink); stroke-width: 2; fill: none; }
-.c6 .chart .drawdown-area { fill: var(--loss); opacity: 0.08; }
-.c6 .chart .trigger-line { stroke: var(--loss); stroke-width: 1; stroke-dasharray: 4 6; }
-.c6 .chart .flag { stroke: var(--muted); stroke-width: 1; }
-.c6 .chart .bar { fill: var(--surface); stroke: var(--hairline-l); }
-.c6 .chart .bar--known { fill: var(--ink); }
 
-/* "Was +19% hot?" mini-ranking of famous first-day pops */
-.c6__pops { display: grid; gap: 10px; max-width: 620px; margin-top: 40px; }
-.pop-row { display: grid; grid-template-columns: 110px 1fr 60px; gap: 16px; align-items: center; }
-.pop-row .bar { height: 8px; background: var(--surface); border: 1px solid var(--hairline-l); transform-origin: left; }
-.pop-row--spcx .bar { background: var(--gain); border-color: var(--gain); }
+/* frame */
+.c6 .chart .grid { stroke: var(--hairline-l); stroke-width: 1; }
+.c6 .chart .tick { stroke: var(--muted); stroke-width: 1; }
+
+/* the daily series — drawn in the dawn accent, the site's instrument colour */
+.c6 .chart .line { stroke: var(--accent); stroke-width: 2.25; fill: none; }
+.c6 .chart .anchor { fill: var(--accent); }
+.c6 .chart .peak-ring { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.c6 .chart .area-stop--top { stop-color: color-mix(in srgb, var(--accent) 8%, transparent); }
+.c6 .chart .area-stop--bottom { stop-color: transparent; }
+
+/* the correction: the chart's one loud mark */
+.c6 .chart .drawdown-area { fill: color-mix(in srgb, var(--loss) 9%, transparent); }
+.c6 .chart .trigger-line { stroke: var(--loss); stroke-width: 1; stroke-dasharray: 4 6; }
+.c6 .chart text.loss-label { fill: var(--loss); }
+.c6 .chart .flag { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 4; opacity: 0.7; }
+
+/* emphasised labels read in ink */
+.c6 .chart text.em { fill: var(--ink); }
+
+/* the supply cliff: reported months solid, estimates hollow */
+.c6 .chart .bar { fill: none; stroke: var(--muted); stroke-width: 1.25; stroke-dasharray: 3 4; }
+.c6 .chart .bar--known { fill: var(--ink); stroke: none; }
+.c6 .chart text.label--wave { fill: var(--accent); }
+
+/* "Was +19.2% even hot?" ranking between the two figures */
+.c6__pops-block { margin: 72px 0; }
+.c6__pops-block h3 { margin-bottom: 14px; }
+.c6__pops-block .lede { margin-bottom: 36px; font-size: 15px; color: var(--muted); }
+
+.c6__pops { display: grid; gap: 14px; max-width: 720px; }
+.pop-row { display: grid; grid-template-columns: 150px 1fr 72px; gap: 18px; align-items: center; }
+.pop-track { height: 12px; background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.pop-row .bar { display: block; height: 100%; background: color-mix(in srgb, var(--ink) 26%, transparent); }
+.pop-row--spcx .bar { background: var(--gain); }
 .pop-row .mono { color: var(--muted); }
+.pop-row .pop-val { text-align: right; }
 .pop-row--spcx .mono { color: var(--ink); }
+
+.c6__money { margin-top: 28px; color: var(--muted); }

@@ -9,8 +9,10 @@
    One line. Nothing else references image paths.
    ============================================================ */
 export const IMAGES = {
+  // IMG-01 now backs C4 (the hero became the procedural launch scene)
   'IMG-01': { file: '/images/img-01-hero.webp', aspect: '16 / 9', alt: 'Stainless-steel super-heavy rocket stacked on its launch tower at pre-dawn, low fog' },
   'IMG-02': { file: '/images/img-02-constellation.webp', aspect: '16 / 9', alt: 'A train of flat satellites in low Earth orbit above the glowing limb of Earth' },
+  // IMG-03 is currently UNUSED (it was C4's backdrop before IMG-01 moved there)
   'IMG-03': { file: '/images/img-03-engines.webp', aspect: '16 / 9', alt: 'Grid of rocket engine nozzles seen directly from below in a dark hangar' },
   'IMG-04': { file: '/images/img-04-catch.webp', aspect: '21 / 9', alt: 'Rocket booster descending between two tower catch-arms, motion-blurred plume' },
   'IMG-05': { file: '/images/img-05-serverhall.webp', aspect: '21 / 9', alt: 'Vast dark server hall receding to a vanishing point' },

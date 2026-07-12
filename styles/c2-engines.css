@@ -1,9 +1,14 @@
-/* C2 · THREE ENGINES — three columns of oversized numerals over IMG-02. */
+/* C2 · THREE ENGINES — three columns of oversized numerals over IMG-02,
+   then the balance instrument (AI spend vs space spend) as glowing bars.
+   The constellation image sits behind a heavy dim: the Earth's limb is
+   bright exactly where the captions fall. */
+.c2 { --scrim-dim: 0.68; }
+
 .c2__cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 48px;
-  margin-top: 88px;
+  margin-top: 48px;
 }
 @media (max-width: 960px) { .c2__cols { grid-template-columns: 1fr; } }
 
@@ -12,6 +17,38 @@
 /* Engine numerals are smaller than monument numerals — three share a row */
 .c2 .engine .numeral { font-size: clamp(48px, 5.4vw, 88px); }
 
-.engine__caption { color: var(--muted); font-size: 15px; max-width: 34ch; margin-top: 12px; }
+/* Near-white, not muted: grey body text over photography was unreadable */
+.engine__caption { color: var(--paper-txt); opacity: 0.85; font-size: 15px; max-width: 34ch; margin-top: 12px; }
 
-.c2__group { margin-top: 88px; color: var(--muted); }
+/* ---- the balance instrument: two bars, one scale, one message ---- */
+.c2__balance {
+  margin-top: 56px;
+  max-width: 760px;
+  display: grid;
+  gap: 14px;
+}
+.c2__balance-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 190px) 1fr 80px;
+  gap: 18px;
+  align-items: center;
+}
+.c2__balance-row > .mono { color: var(--paper-txt); opacity: 0.6; }
+.c2__balance-val { text-align: right; }
+.c2__balance-track {
+  position: relative;
+  height: 10px;
+  background: color-mix(in srgb, var(--paper-txt) 8%, transparent);
+}
+.c2__balance-fill { display: block; height: 100%; }
+.c2__balance-fill--ai {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 55%, var(--black)), var(--accent-hot));
+  box-shadow: var(--glow-amber);
+}
+.c2__balance-fill--space { background: color-mix(in srgb, var(--paper-txt) 45%, transparent); }
+@media (max-width: 600px) {
+  .c2__balance-row { grid-template-columns: 1fr 70px; }
+  .c2__balance-row > .mono:first-child { grid-column: 1 / -1; margin-bottom: -8px; }
+}
+
+.c2__group { margin-top: 32px; color: var(--muted); }

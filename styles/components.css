@@ -17,13 +17,54 @@
 .numeral--loss { color: var(--loss); }
 .numeral__unit { font-size: 0.35em; color: var(--muted); }
 
-/* A full viewport given to one number and one sentence (§12) */
+/* In the dark register the numerals glow like instrument readouts —
+   the hero's luminescence carried into the data (redesign, July 2026) */
+.chapter--dark .numeral { text-shadow: var(--glow-soft); }
+.chapter--dark .numeral--gain { text-shadow: 0 0 32px color-mix(in srgb, var(--gain) 45%, transparent); }
+.chapter--dark .numeral--loss { text-shadow: 0 0 32px color-mix(in srgb, var(--loss) 45%, transparent); }
+
+/* ---- the lumen sky (src/lib/lumen.js): dawn gradient + star field ----
+   A full-bleed backdrop for dark sections that carry no photograph:
+   near-black zenith, a plum-to-amber wash rising from the bottom edge
+   (the atmosphere band just out of frame), and seeded twinkling stars. */
+.lumen-sky {
+  position: absolute; inset: 0; overflow: hidden;
+  z-index: 0; pointer-events: none;
+  background: linear-gradient(0deg, color-mix(in srgb, var(--sky-mid) 55%, var(--black)) 0%, var(--sky-top) 55%);
+}
+.lumen-sky--horizon::after {
+  content: '';
+  position: absolute; left: -10%; right: -10%; bottom: -14vh; height: 44vh;
+  background: radial-gradient(60% 100% at 50% 100%,
+    color-mix(in srgb, var(--sky-horizon) 34%, transparent) 0%,
+    color-mix(in srgb, var(--sky-mid) 40%, transparent) 45%,
+    transparent 75%);
+}
+.lumen-stars { position: absolute; inset: 0; }
+.lumen-stars i {
+  position: absolute;
+  width: 2px; height: 2px; border-radius: 50%;
+  background: var(--starlight);
+  animation: lumen-twinkle 6s ease-in-out infinite;
+}
+.lumen-stars i.is-bright {
+  width: 3px; height: 3px;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--starlight) 90%, transparent);
+}
+@keyframes lumen-twinkle {
+  0%, 100% { transform: scale(1); filter: brightness(0.7); }
+  50%      { transform: scale(1.25); filter: brightness(1.4); }
+}
+
+/* One number and one sentence, given room to breathe — but not a whole
+   screen each: three of these stack in C4, and full-viewport blocks left
+   the chapter feeling empty */
 .monument {
-  min-height: 100vh;
+  min-height: 58vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 /* ---- media & image placeholders ---- */
@@ -49,11 +90,19 @@
 }
 .img-placeholder .mono { color: var(--muted); padding: 16px; text-align: center; }
 
-/* Dark chapters keep text readable over (future) imagery */
+/* Dark chapters keep text readable over imagery: an edge gradient plus a
+   flat dim whose strength each chapter tunes with --scrim-dim (the more
+   text a chapter carries, the harder it dims). The imagery is atmosphere,
+   not information — when in doubt, the words win. */
 .chapter--dark .scrim {
   position: absolute; inset: 0; z-index: 0;
   background: linear-gradient(180deg, var(--black) 0%, transparent 30%, transparent 70%, var(--black) 100%);
-  opacity: 0.85;
+}
+.chapter--dark .scrim::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--black);
+  opacity: var(--scrim-dim, 0.55);
 }
 
 /* ---- hairline tables (C3 comparison, C7 ledger, C8 sources) ---- */
@@ -105,7 +154,7 @@
 
 /* ---- chart svg text ---- */
 .chart text {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 11px;
   letter-spacing: 0.08em;
   fill: var(--muted);

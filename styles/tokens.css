@@ -17,10 +17,30 @@
   --gain:       #1E9E63;                 /* market green — data only */
   --loss:       #E5484D;                 /* market red — data only */
 
+  /* ---- hero dawn palette — the shader sky in C0.
+     Read at runtime by src/lib/ascent-scene.js. ---- */
+  --sky-top:     #04050A;                /* night zenith */
+  --sky-mid:     #2B1620;                /* dark plum between night and dawn */
+  --sky-horizon: #C96F3B;                /* burnt-amber dawn band */
+  --dawn-sun:    #FFD9A6;                /* low sun below the limb */
+
+  /* ---- the dawn, promoted to a sitewide accent (redesign, July 2026):
+     the hero's luminescence carried through every chapter. --accent is the
+     burnt amber of the atmosphere band; --accent-hot the sun about to rise.
+     Use sparingly — on instruments, live marks and interactive elements. ---- */
+  --accent:      #C96F3B;
+  --accent-hot:  #FFD9A6;
+  --starlight:   #D3D8E8;               /* the shader's star tint, for DOM star fields */
+  /* soft glows for luminous elements on dark surfaces */
+  --glow-amber:  0 0 24px rgba(201, 111, 59, 0.55), 0 0 80px rgba(201, 111, 59, 0.22);
+  --glow-soft:   0 0 40px rgba(255, 217, 166, 0.14);
+
   /* ---- typography ---- */
   --font-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  /* labels/axes use the display grotesk, letter-spaced — typewriter faces
+     were removed from the whole site by request */
+  --font-label:   'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
 
   --display-tracking: -0.03em;           /* §12: headline tracking */
   --display-leading:  0.95;              /* §12: headline line-height */
@@ -34,7 +54,9 @@
   --tracking-label: 0.16em;
 
   /* ---- layout ---- */
-  --section-pad: clamp(96px, 13vw, 208px);   /* §12: ≥160px on desktop */
+  /* Tighter than the §12 sketch (≥160px) — full-size padding on every
+     section made the page feel empty; ~120px desktop keeps the rhythm */
+  --section-pad: clamp(72px, 9vw, 128px);
   --content-max: 1280px;
   --gutter:      clamp(20px, 4vw, 56px);
 

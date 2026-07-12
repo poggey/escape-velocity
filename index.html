@@ -18,57 +18,89 @@
   <a class="skip-link mono" href="#c1">Skip to content</a>
   <main id="top">
 
-    <!-- ================= C0 · HERO (dark, IMG-01) ================= -->
+    <!-- ================= C0 · HERO (dark, full-bleed shader) ================= -->
+    <!-- The limb of Earth at pre-dawn (src/lib/ascent-scene.js) behind a
+         centred title page: masthead on the top hairline, monumental
+         headline, and the deal's four defining numbers along the bottom. -->
     <section class="chapter chapter--dark c0" id="c0" data-chapter="00 / THE OFFERING">
-      <div class="media media--cover" data-img="IMG-01"></div>
-      <div class="scrim" aria-hidden="true"></div>
-      <div class="container">
-        <p class="mono label c0__kicker">NASDAQ : SPCX · 12 JUNE 2026</p>
-        <h1 class="c0__headline">
-          <span class="mask-line">The <span data-fact="ipo.valuation_tn" data-format="usd2"></span> Trillion</span>
-          <span class="mask-line">Offering.</span>
-        </h1>
-        <p class="c0__sub">The largest IPO in history — and what the market did with it.</p>
-        <p class="mono c0__cue" aria-hidden="true">SCROLL ↓</p>
+      <canvas id="c0-canvas" class="c0__canvas" aria-hidden="true"></canvas>
+      <div class="container c0__frame">
+        <header class="c0__mast mono">
+          <span>Escape Velocity</span>
+          <span class="c0__mast-mid">Anatomy of the largest IPO in history</span>
+          <span>NASDAQ : SPCX</span>
+        </header>
+        <div class="c0__centre">
+          <p class="mono c0__kicker">12 June 2026 · 09:30 EDT</p>
+          <h1 class="c0__headline">
+            <span class="mask-line">The <span data-fact="ipo.valuation_tn" data-format="usd2"></span> Trillion</span>
+            <span class="mask-line">Offering.</span>
+          </h1>
+          <p class="c0__sub">The largest IPO in history — and what the market did with it.</p>
+          <p class="mono c0__cue" aria-hidden="true">Scroll</p>
+        </div>
+        <footer class="c0__foot">
+          <span class="c0__rule" aria-hidden="true"></span>
+          <dl class="c0__stats">
+            <div class="c0__stat"><dt class="mono">Offer price</dt><dd data-fact="ipo.price" data-format="usd0"></dd></div>
+            <div class="c0__stat"><dt class="mono">Raised</dt><dd data-fact="ipo.raise_bn" data-format="bn0"></dd></div>
+            <div class="c0__stat"><dt class="mono">EV / EBITDA</dt><dd data-fact="valuation.ev_ebitda_multiple" data-format="x"></dd></div>
+            <div class="c0__stat"><dt class="mono">Day-one close</dt><dd data-fact="day_one.gain_pct" data-format="pct1"></dd></div>
+          </dl>
+        </footer>
       </div>
     </section>
 
     <!-- ================= C1 · THE MACHINE (light) ================= -->
     <section class="chapter chapter--light c1" id="c1" data-chapter="01 / THE MACHINE">
       <div class="container">
-        <p class="mono label">01 / THE MACHINE</p>
+        <p class="mono label">01 / THE MACHINE<span class="label__stage">THE COUNTDOWN</span></p>
         <h2>How an IPO is<br />supposed to work</h2>
-        <div class="c1__steps">
-          <article class="step-card">
-            <span class="step-card__rule" aria-hidden="true"></span>
-            <p class="mono step-card__num">01 · THE S-1</p>
-            <h3>Disclosure</h3>
-            <p>The company files a prospectus with the SEC — financials, risks, ownership. The public's first real look inside.</p>
-          </article>
-          <article class="step-card">
-            <span class="step-card__rule" aria-hidden="true"></span>
-            <p class="mono step-card__num">02 · THE ROADSHOW</p>
-            <h3>The pitch</h3>
-            <p>Management and the underwriting banks spend about two weeks pitching institutional investors.</p>
-          </article>
-          <article class="step-card">
-            <span class="step-card__rule" aria-hidden="true"></span>
-            <p class="mono step-card__num">03 · BOOKBUILDING</p>
-            <h3>Price discovery</h3>
-            <p>Banks publish a price range and collect orders. Demand at each level tells them where the market clears.</p>
-          </article>
-          <article class="step-card">
-            <span class="step-card__rule" aria-hidden="true"></span>
-            <p class="mono step-card__num">04 · ALLOCATION</p>
-            <h3>The favour economy</h3>
-            <p>Banks decide who gets shares. Institutions take most; retail typically gets <span data-fact="convention.retail_range"></span>. Fees run <span data-fact="convention.fee_range"></span>; insiders are locked up <span data-fact="convention.lockup_days"></span> days.</p>
-          </article>
-          <article class="step-card">
-            <span class="step-card__rule" aria-hidden="true"></span>
-            <p class="mono step-card__num">05 · THE DEBUT</p>
-            <h3>The pop</h3>
-            <p>A first-day rise of <span data-fact="convention.pop_range"></span> is called a success — though a big pop means money was left on the table.</p>
-          </article>
+        <!-- The countdown rail: the conventional machine as a launch sequence.
+             A hairline runs through five station nodes; a pulse of light
+             travels it while the cards assemble beneath (c1-machine.js). -->
+        <div class="c1__sequence">
+          <div class="c1__rail" aria-hidden="true">
+            <span class="c1__rail-fill"></span>
+            <span class="c1__rail-pulse"></span>
+          </div>
+          <div class="c1__steps">
+            <article class="step-card">
+              <span class="step-card__node" aria-hidden="true"></span>
+              <span class="step-card__ghost" aria-hidden="true">01</span>
+              <p class="mono step-card__num">T−5 · THE S-1</p>
+              <h3>Disclosure</h3>
+              <p>The company files a prospectus with the SEC — financials, risks, ownership. The public's first real look inside.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-card__node" aria-hidden="true"></span>
+              <span class="step-card__ghost" aria-hidden="true">02</span>
+              <p class="mono step-card__num">T−4 · THE ROADSHOW</p>
+              <h3>The pitch</h3>
+              <p>Management and the underwriting banks spend about two weeks pitching institutional investors.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-card__node" aria-hidden="true"></span>
+              <span class="step-card__ghost" aria-hidden="true">03</span>
+              <p class="mono step-card__num">T−3 · BOOKBUILDING</p>
+              <h3>Price discovery</h3>
+              <p>Banks publish a price range and collect orders. Demand at each level tells them where the market clears.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-card__node" aria-hidden="true"></span>
+              <span class="step-card__ghost" aria-hidden="true">04</span>
+              <p class="mono step-card__num">T−2 · ALLOCATION</p>
+              <h3>The favour economy</h3>
+              <p>Banks decide who gets shares. Institutions take most; retail typically gets <span data-fact="convention.retail_range"></span>. Fees run <span data-fact="convention.fee_range"></span>; insiders are locked up <span data-fact="convention.lockup_days"></span> days.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-card__node" aria-hidden="true"></span>
+              <span class="step-card__ghost" aria-hidden="true">05</span>
+              <p class="mono step-card__num">T−1 · THE DEBUT</p>
+              <h3>The pop</h3>
+              <p>A first-day rise of <span data-fact="convention.pop_range"></span> is called a success — though a big pop means money was left on the table.</p>
+            </article>
+          </div>
         </div>
         <p class="c1__close display">SpaceX kept the paperwork — and threw away the machine.</p>
       </div>
@@ -79,7 +111,7 @@
       <div class="media media--cover" data-img="IMG-02"></div>
       <div class="scrim" aria-hidden="true"></div>
       <div class="container">
-        <p class="mono label">02 / THREE ENGINES</p>
+        <p class="mono label">02 / THREE ENGINES<span class="label__stage">THE VEHICLE</span></p>
         <h2>The company that listed is<br />not the company you think</h2>
         <div class="c2__cols">
           <div class="engine">
@@ -98,67 +130,105 @@
             <p class="engine__caption">Losses per quarter — the loss engine carrying the valuation story. Its flagship cloud deal is terminable on 90 days' notice.</p>
           </div>
         </div>
-        <p class="mono c2__group">GROUP, 2025 · REVENUE <span data-fact="valuation.revenue_2025_bn" data-format="bn1"></span> · OPERATING LOSS <span data-fact="valuation.op_loss_2025_bn" data-format="bn1"></span> · AI SPEND <span data-fact="engines.ai_spend_2025_bn" data-format="bn1"></span> VS SPACE <span data-fact="engines.space_spend_2025_bn" data-format="bn1"></span></p>
+        <!-- Where the money actually goes: two glowing bars, drawn by
+             c2-engines.js from facts.json — AI spend dwarfing space spend -->
+        <div class="c2__balance" id="c2-balance" role="img"
+          aria-label="2025 spend: AI 12.7 billion dollars against space 3.8 billion dollars"></div>
+        <p class="mono c2__group">GROUP, 2025 · REVENUE <span data-fact="valuation.revenue_2025_bn" data-format="bn1"></span> · OPERATING LOSS <span data-fact="valuation.op_loss_2025_bn" data-format="bn1"></span></p>
       </div>
     </section>
 
     <!-- ================= C3 · BREAKING THE PLAYBOOK (light) ================= -->
     <section class="chapter chapter--light c3" id="c3" data-chapter="03 / BREAKING THE PLAYBOOK">
       <div class="container">
-        <p class="mono label">03 / BREAKING THE PLAYBOOK</p>
+        <p class="mono label">03 / BREAKING THE PLAYBOOK<span class="label__stage">THE FLIGHT PLAN</span></p>
         <h2>Five deviations</h2>
-        <p class="lede" style="margin-top:32px">SpaceX didn't run an IPO; it dictated one. Convention on the left, what actually happened on the right.</p>
-        <table class="rule-table">
-          <thead>
-            <tr><th class="mono">DIMENSION</th><th class="mono">CONVENTION</th><th class="mono">SPACEX</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="mono">PRICING</td>
-              <td class="convention">Bookbuild across a published range; the market discovers the price.</td>
-              <td class="spacex">Fixed at <span data-fact="ipo.price" data-format="usd0"></span> — take it or leave it.
-                <span class="mono">"Elon has dictated the price." — Lise Buyer, IPO adviser</span></td>
-            </tr>
-            <tr>
-              <td class="mono">FEES</td>
-              <td class="convention"><span data-fact="convention.fee_range"></span> of proceeds — banks discipline issuers.</td>
-              <td class="spacex">Under <span data-fact="ipo.fee_pct_cap"></span>% — about <span data-fact="ipo.fees_bn" data-format="bn1"></span> across <span data-fact="ipo.banks"></span> banks.
-                <span class="mono">A ~90% haircut, accepted for prestige. Power inverted.</span></td>
-            </tr>
-            <tr>
-              <td class="mono">RETAIL</td>
-              <td class="convention"><span data-fact="convention.retail_range"></span> of the deal.</td>
-              <td class="spacex">~<span data-fact="ipo.retail_pct"></span>% — <span data-fact="ipo.retail_bn" data-format="bn1"></span> via Schwab, Fidelity, Robinhood, SoFi, E*Trade.
-                <span class="mono">Democratised access — or the most enthusiastic marginal buyer, reached deliberately. Both readings are true.</span></td>
-            </tr>
-            <tr>
-              <td class="mono">CONDITIONS</td>
-              <td class="convention">Allocation as a favour economy; flipping frowned upon.</td>
-              <td class="spacex">Banks reportedly required to buy Grok subscriptions; flippers warned off allocation.
-                <span class="mono">NYT reporting, April 2026 — some banks spending tens of millions annually.</span></td>
-            </tr>
-            <tr>
-              <td class="mono">INDEX</td>
-              <td class="convention">Wait for eligibility windows.</td>
-              <td class="spacex">Nasdaq rule change → index entry as soon as ~<span data-fact="ipo.index_days"></span> trading days post-IPO.
-                <span class="mono">Joined the Nasdaq-100 on 7 July — <span data-fact="aftermath.ndx_inflows_bn" data-format="bn1"></span> of forced passive buying engineered into the aftermarket.</span></td>
-            </tr>
-          </tbody>
-        </table>
+        <p class="lede">SpaceX didn't run an IPO; it dictated one. Five dials on the deal, each set far outside convention. Select a deviation — or let the board run.</p>
+
+        <!-- The deviation board (c3-playbook.js): five tabs on the left, and a
+             dark instrument display where the convention track runs straight
+             and the SpaceX track burns away from it. Content lives in the
+             hidden ledger below; figures via data-fact as everywhere. -->
+        <div class="c3__board" id="c3-board">
+          <div class="c3__tabs" role="tablist" aria-label="The five deviations" id="c3-tabs"></div>
+          <div class="c3__display">
+            <svg class="c3__fork" id="c3-fork" viewBox="0 0 560 236" aria-hidden="true"></svg>
+            <div class="c3__compare">
+              <div class="c3__side c3__side--conv">
+                <p class="mono c3__side-tag">CONVENTION</p>
+                <p class="c3__stat" id="c3-conv-stat"></p>
+                <p class="c3__text" id="c3-conv-text"></p>
+              </div>
+              <div class="c3__side c3__side--spcx">
+                <p class="mono c3__side-tag">SPACEX</p>
+                <p class="c3__stat" id="c3-spcx-stat"></p>
+                <p class="c3__text" id="c3-spcx-text"></p>
+                <p class="mono c3__note" id="c3-note"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The ledger: single source for the board. data-diverge sets how
+             hard the SpaceX track pulls away in the fork diagram (0..1). -->
+        <ul id="c3-deviations" hidden>
+          <li data-name="PRICING" data-diverge="0.80">
+            <span data-role="chip">NO BOOKBUILD</span>
+            <span data-role="conv-stat">A RANGE</span>
+            <span data-role="conv">Bookbuild across a published range; the market discovers the price.</span>
+            <span data-role="spcx-stat"><span data-fact="ipo.price" data-format="usd0"></span> FLAT</span>
+            <span data-role="spcx">Fixed the night before — take it or leave it. No range, no discovery.</span>
+            <span data-role="note">"Elon has dictated the price." — Lise Buyer, IPO adviser</span>
+          </li>
+          <li data-name="FEES" data-diverge="0.92">
+            <span data-role="chip">~90% HAIRCUT</span>
+            <span data-role="conv-stat"><span data-fact="convention.fee_range"></span></span>
+            <span data-role="conv">Of proceeds — the price of underwriting, and the banks' leverage over issuers.</span>
+            <span data-role="spcx-stat">&lt;<span data-fact="ipo.fee_pct_cap"></span>%</span>
+            <span data-role="spcx">About <span data-fact="ipo.fees_bn" data-format="bn1"></span> split across <span data-fact="ipo.banks"></span> banks — accepted for prestige. Power inverted.</span>
+            <span data-role="note">The record deal paid the smallest fee rate in IPO history.</span>
+          </li>
+          <li data-name="RETAIL" data-diverge="0.66">
+            <span data-role="chip">3–6× NORMAL</span>
+            <span data-role="conv-stat"><span data-fact="convention.retail_range"></span></span>
+            <span data-role="conv">Of the deal — allocation is a favour economy, and retail is last in line.</span>
+            <span data-role="spcx-stat">~<span data-fact="ipo.retail_pct"></span>%</span>
+            <span data-role="spcx"><span data-fact="ipo.retail_bn" data-format="bn1"></span> via Schwab, Fidelity, Robinhood, SoFi, E*Trade. Democratised access — or the most enthusiastic marginal buyer, reached deliberately. Both readings are true.</span>
+            <span data-role="note">The largest retail allocation of any mega-IPO.</span>
+          </li>
+          <li data-name="CONDITIONS" data-diverge="0.55">
+            <span data-role="chip">GROK CLAUSE</span>
+            <span data-role="conv-stat">FAVOURS</span>
+            <span data-role="conv">Allocation as relationship currency; flipping quietly frowned upon.</span>
+            <span data-role="spcx-stat">TRIBUTE</span>
+            <span data-role="spcx">Banks reportedly required to buy Grok subscriptions; flippers warned off allocation.</span>
+            <span data-role="note">NYT reporting, April 2026 — some banks spending tens of millions annually.</span>
+          </li>
+          <li data-name="INDEX" data-diverge="0.72">
+            <span data-role="chip">RULE CHANGE</span>
+            <span data-role="conv-stat">WINDOWS</span>
+            <span data-role="conv">Wait for scheduled eligibility reviews, months after listing.</span>
+            <span data-role="spcx-stat">~<span data-fact="ipo.index_days"></span> DAYS</span>
+            <span data-role="spcx">Nasdaq changed its rules; SPCX joined the Nasdaq-100 on 7 July — <span data-fact="aftermath.ndx_inflows_bn" data-format="bn1"></span> of forced passive buying engineered into the aftermarket.</span>
+            <span data-role="note">Index inclusion as deal architecture, not aftermath.</span>
+          </li>
+        </ul>
+
         <div class="c3__timeline" id="c3-timeline"><!-- deal timeline filled from data/events.json --></div>
       </div>
     </section>
 
-    <!-- ================= C4 · THE PRICE OF BELIEF (dark, IMG-03) ================= -->
+    <!-- ================= C4 · THE PRICE OF BELIEF (dark, IMG-01) ================= -->
     <section class="chapter chapter--dark c4" id="c4" data-chapter="04 / THE PRICE OF BELIEF">
-      <div class="media media--cover" data-img="IMG-03"></div>
+      <div class="media media--cover" data-img="IMG-01"></div>
       <div class="scrim" aria-hidden="true"></div>
       <div class="container">
-        <p class="mono label">04 / THE PRICE OF BELIEF</p>
+        <p class="mono label">04 / THE PRICE OF BELIEF<span class="label__stage">THE FUEL</span></p>
         <div class="monument">
           <p class="numeral" id="c4-multiple" aria-label="94 times EBITDA"></p>
           <p class="caption">Trailing 2025 adjusted EBITDA of <span data-fact="valuation.ebitda_2025_bn" data-format="bn1"></span>, valued at <span data-fact="ipo.valuation_tn" data-format="tn"></span> — an unheard-of multiple for a mega-cap.</p>
-          <p class="mono">TRILLION-DOLLAR PEERS TRADE AT <span data-fact="valuation.megacap_multiple_low"></span>–<span data-fact="valuation.megacap_multiple_high"></span>× · THIRTEEN MONTHS EARLIER THE COMPANY WAS VALUED AT <span data-fact="valuation.prior_valuation_bn" data-format="bn0"></span></p>
+          <div class="c4__scale" id="c4-scale" role="img" aria-label="SPCX at 94 times EBITDA against trillion-dollar peers at 15 to 40 times"></div>
+          <p class="mono">THIRTEEN MONTHS EARLIER THE PRIVATE MARK WAS <span data-fact="valuation.prior_valuation_bn" data-format="bn0"></span></p>
         </div>
         <div class="monument">
           <p class="numeral" id="c4-tam" aria-label="28.5 trillion dollar claimed market"></p>
@@ -187,10 +257,13 @@
       </div>
     </section>
 
-    <!-- ================= C5 · LISTING DAY (light, PINNED) ================= -->
-    <section class="chapter chapter--light c5" id="c5" data-chapter="05 / LISTING DAY">
+    <!-- ================= C5 · LISTING DAY (dark terminal, PINNED) ================= -->
+    <!-- Redesign: the session as a glowing trading terminal — the lumen sky
+         behind, the traded line burning green over near-black. -->
+    <section class="chapter chapter--dark c5" id="c5" data-chapter="05 / LISTING DAY">
       <div class="container c5__stage">
-        <p class="mono label">05 / LISTING DAY · 12 JUNE 2026</p>
+        <p class="mono label">05 / LISTING DAY · 12 JUNE 2026<span class="label__stage">IGNITION · T+0</span></p>
+        <p class="lede c5__lede">Priced at <span data-fact="ipo.price" data-format="usd0"></span> the night before. No trades for the first two and a half hours while the book was matched — then this.</p>
         <div class="c5__readout">
           <div><p class="mono">GAIN VS $135</p><p class="numeral numeral--gain" id="c5-gain">+0.0%</p></div>
           <div><p class="mono">MARKET CAP</p><p class="numeral" id="c5-cap">$1.77T</p></div>
@@ -207,22 +280,51 @@
     <!-- ================= C6 · THE AFTERMATH (light) ================= -->
     <section class="chapter chapter--light c6" id="c6" data-chapter="06 / THE AFTERMATH">
       <div class="container">
-        <p class="mono label">06 / THE AFTERMATH</p>
-        <h2>Where the real<br />analysis lives</h2>
+        <p class="mono label">06 / THE AFTERMATH<span class="label__stage">THE TRAJECTORY</span></p>
+        <h2>The story didn't end<br />at the close</h2>
+        <p class="lede">Listing day was the launch; this is the trajectory. A +<span data-fact="aftermath.peak_gain_pct"></span>% sprint, a <span data-fact="aftermath.drawdown_pct" data-format="pct0"></span> give-back, and a supply cliff still ahead — the evidence the verdict rests on, in three exhibits.</p>
+
+        <div class="c6__summary">
+          <div class="c6__stat">
+            <p class="mono">THE RUN</p>
+            <p class="numeral numeral--gain" id="c6-run" aria-label="plus 67 percent to the peak"></p>
+            <p class="c6__stat-note">to <span data-fact="aftermath.peak" data-format="usd2"></span> in eight sessions</p>
+          </div>
+          <div class="c6__stat">
+            <p class="mono">THE GIVE-BACK</p>
+            <p class="numeral numeral--loss" id="c6-give" aria-label="minus 32 percent from the peak"></p>
+            <p class="c6__stat-note">back to <span data-fact="aftermath.price_jul8" data-format="usd0"></span> by 8 July</p>
+          </div>
+          <div class="c6__stat">
+            <p class="mono">LEFT ON THE TABLE</p>
+            <p class="numeral" id="c6-left" aria-label="14.4 billion dollars left on the table"></p>
+            <p class="c6__stat-note">small by pop standards — evidence the fixed price worked</p>
+          </div>
+        </div>
 
         <figure>
+          <h3><span class="mono c6__exhibit">EXHIBIT A</span> The round trip</h3>
+          <p class="lede">Daily closes since listing: a +<span data-fact="aftermath.peak_gain_pct"></span>% run in eight sessions, then a <span data-fact="aftermath.drawdown_pct" data-format="pct0"></span> give-back. Everyone who bought in the open market on day one and held is underwater; IPO-allocation recipients are still up.</p>
           <div id="c6-price-chart"><!-- daily series SVG drawn by c6-aftermath.js --></div>
           <div class="annotations" id="c6-price-annotations"></div>
-          <figcaption>SPCX daily close since listing. The run to <span data-fact="aftermath.peak" data-format="usd2"></span> (+<span data-fact="aftermath.peak_gain_pct"></span>%), the <span data-fact="aftermath.drawdown_pct" data-format="pct0"></span> correction, and the <span data-fact="aftermath.unlock_trigger_price" data-format="usd2"></span> unlock trigger it would now have to reach before 3 August. Everyone who bought in the open market on day one and held is underwater; IPO-allocation recipients are still up.</figcaption>
+          <figcaption>The dashed line is the <span data-fact="aftermath.unlock_trigger_price" data-format="usd2"></span> early-unlock trigger — the price SPCX would now have to reclaim before 3 August to release ~<span data-fact="aftermath.unlock_trigger_shares_m"></span>M extra shares.</figcaption>
         </figure>
 
-        <div class="c6__pops" id="c6-pops"><!-- famous first-day pops, from data/day_one_pops.json --></div>
-        <p class="mono" style="margin-top:16px" id="c6-money"><!-- money-left-on-the-table annotation from data/money_left.json --></p>
+        <div class="c6__pops-block">
+          <h3><span class="mono c6__exhibit">EXHIBIT B</span> Was +19.2% even hot?</h3>
+          <p class="lede">First-day pops of famous listings. By mega-IPO standards SpaceX's debut was almost restrained — which is exactly what a well-set fixed price looks like.</p>
+          <div class="c6__pops" id="c6-pops"><!-- famous first-day pops, from data/day_one_pops.json --></div>
+          <p class="mono c6__money" id="c6-money"><!-- money-left-on-the-table annotation from data/money_left.json --></p>
+        </div>
 
         <figure>
+          <h3><span class="mono c6__exhibit">EXHIBIT C</span> The supply cliff</h3>
+          <p class="lede">Only <span data-fact="aftermath.float_ipo_pct"></span>% of the company traded at the IPO — scarcity was part of the price. Lockups release in waves from 6 August; by December ~<span data-fact="aftermath.float_dec_pct"></span>% is tradable. Supply is the gravity acting on the hype.</p>
           <div id="c6-supply-chart"><!-- float-supply bars drawn by c6-aftermath.js --></div>
-          <figcaption>Tradable float, <span data-fact="aftermath.float_ipo_pct"></span>% at IPO to a projected ~<span data-fact="aftermath.float_dec_pct"></span>% by December, as lockup waves release (first wave after earnings on 6 August; Musk himself locked for <span data-fact="governance.musk_lockup_days"></span> days). Intermediate months are estimates from reported terms. Supply is the gravity acting on the hype.</figcaption>
+          <figcaption>Endpoints are reported terms; intermediate months are estimates (drawn hollow). Musk himself is locked for <span data-fact="governance.musk_lockup_days"></span> days.</figcaption>
         </figure>
+
+        <p class="c6__close display"><span class="mask-line">Three exhibits entered.</span><span class="mask-line">Now the verdict.</span></p>
       </div>
     </section>
 
@@ -237,47 +339,39 @@
       </div>
     </section>
 
-    <!-- ================= C7 · THE VERDICT (dark, IMG-06) ================= -->
+    <!-- ================= C7 · THE VERDICT (dark, the ascent map) ================= -->
+    <!-- Redesign: the hero's world, revisited as the verdict. The limb of
+         Earth curves along the bottom of a full-width map; six rockets fly
+         the six outcomes — altitude IS the verdict. Built by c7-verdict.js;
+         the lumen sky mounts behind it. -->
     <section class="chapter chapter--dark c7" id="c7" data-chapter="07 / THE VERDICT">
-      <div class="media media--cover" data-img="IMG-06"></div>
-      <div class="scrim" aria-hidden="true"></div>
       <div class="container">
-        <p class="mono label">07 / THE VERDICT</p>
-        <h2>Successful — for whom?</h2>
-        <table class="rule-table">
-          <tbody>
-            <tr>
-              <td class="constituency">The company</td>
-              <td class="verdict-word"><span class="mono">WIN</span></td>
-              <td class="evidence">Raised ~<span data-fact="ipo.total_proceeds_bn" data-format="bn0"></span> at a self-set price; ~<span data-fact="day_one.money_left_bn" data-format="bn1"></span> left on the table is small by pop standards.</td>
-            </tr>
-            <tr>
-              <td class="constituency">IPO allocation holders</td>
-              <td class="verdict-word"><span class="mono">MODEST WIN, SHRINKING</span></td>
-              <td class="evidence">+<span data-fact="day_one.gain_pct"></span>% day one; ~+<span data-fact="aftermath.gain_since_ipo_pct"></span>% by early July; paper gains eroding.</td>
-            </tr>
-            <tr>
-              <td class="constituency">Day-one open-market buyers</td>
-              <td class="verdict-word"><span class="mono">UNDERWATER</span></td>
-              <td class="evidence">Bought $150–$225; price ~<span data-fact="aftermath.price_jul8" data-format="usd0"></span>.</td>
-            </tr>
-            <tr>
-              <td class="constituency">The banks</td>
-              <td class="verdict-word"><span class="mono">PYRRHIC</span></td>
-              <td class="evidence">~<span data-fact="ipo.fees_bn" data-format="bn1"></span> in fees on the record deal; the fee model and allocation power publicly broken; Grok-subscription optics.</td>
-            </tr>
-            <tr>
-              <td class="constituency">Retail</td>
-              <td class="verdict-word"><span class="mono">INCLUDED — AND EXPOSED</span></td>
-              <td class="evidence"><span data-fact="ipo.retail_pct"></span>% allocation was real democratisation — of a <span data-fact="valuation.ev_ebitda_multiple"></span>×-EBITDA risk.</td>
-            </tr>
-            <tr>
-              <td class="constituency">Market structure</td>
-              <td class="verdict-word"><span class="mono">PRECEDENT SET</span></td>
-              <td class="evidence">Fixed pricing, sub-1% fees, engineered index inclusion — the playbook the next mega-IPOs may follow.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p class="mono label">07 / THE VERDICT<span class="label__stage">ORBIT CHECK</span></p>
+        <h2>Who reached<br />escape velocity?</h2>
+        <p class="lede">An IPO is a launch: everyone aboard wants enough speed to stay up. A month on, here are the six parties to the deal, each flown as a flight path — the higher the flight, the better the outcome.</p>
+        <p class="mono c7__key">READ IT LIKE AN ALTIMETER · HIGHER IS BETTER · SELECT ANY FLIGHT FOR THE EVIDENCE</p>
+      </div>
+
+      <div class="c7__map">
+        <svg id="c7-orbit" viewBox="0 0 1200 700" role="img"
+          aria-label="The six constituencies of the deal flown as rockets above the limb of Earth: the company holds a high stable orbit, IPO holders' orbit decays, day-one buyers arc up and fall back, the banks barely clear the surface, retail swings between bands, and market structure escapes off the top"></svg>
+        <div class="c7__readout" id="c7-readout" aria-live="polite"></div>
+      </div>
+
+      <div class="container">
+        <div class="c7__legend" id="c7-legend"><!-- one button per constituency, built by c7-verdict.js --></div>
+
+        <!-- The ledger data: one line per constituency, figures via data-fact.
+             Hidden here; c7-verdict.js flies each and lifts it into the
+             readout on select. data-orbit picks the flight behaviour. -->
+        <ul id="c7-ledger" hidden>
+          <li data-sat="company" data-name="THE COMPANY" data-verdict="WIN" data-badge="WIN" data-orbit="stable" data-tone="gain"><span data-role="desc">The issuer. Set its own price, kept the proceeds.</span><span data-role="evidence">Raised ~<span data-fact="ipo.total_proceeds_bn" data-format="bn0"></span> at a self-set price; ~<span data-fact="day_one.money_left_bn" data-format="bn1"></span> left on the table is small by pop standards.</span></li>
+          <li data-sat="holders" data-name="IPO ALLOCATION HOLDERS" data-verdict="MODEST WIN, SHRINKING" data-badge="FADING" data-orbit="decay" data-tone="paper"><span data-role="desc">Anyone allocated stock at the <span data-fact="ipo.price" data-format="usd0"></span> offer, the night before trading.</span><span data-role="evidence">+<span data-fact="day_one.gain_pct"></span>% day one; ~+<span data-fact="aftermath.gain_since_ipo_pct"></span>% by early July; paper gains eroding — the orbit is slowly giving way.</span></li>
+          <li data-sat="dayone" data-name="DAY-ONE BUYERS" data-verdict="UNDERWATER" data-badge="UNDERWATER" data-orbit="fall" data-tone="loss"><span data-role="desc">Anyone who paid the market price after the open — <span data-fact="day_one.open" data-format="usd0"></span> and up.</span><span data-role="evidence">Bought $150–$225; price ~<span data-fact="aftermath.price_jul8" data-format="usd0"></span>. Never reached a stable orbit.</span></li>
+          <li data-sat="banks" data-name="THE BANKS" data-verdict="PYRRHIC" data-badge="PYRRHIC" data-orbit="tiny" data-tone="paper"><span data-role="desc">The <span data-fact="ipo.banks"></span> underwriters — paid in prestige, not fees.</span><span data-role="evidence">~<span data-fact="ipo.fees_bn" data-format="bn1"></span> in fees on the record deal; the fee model and allocation power publicly broken. In orbit, barely.</span></li>
+          <li data-sat="retail" data-name="RETAIL" data-verdict="INCLUDED — AND EXPOSED" data-badge="EXPOSED" data-orbit="eccentric" data-tone="paper"><span data-role="desc">The <span data-fact="ipo.retail_pct"></span>% of the deal sold through brokerage apps.</span><span data-role="evidence"><span data-fact="ipo.retail_pct"></span>% allocation was real democratisation — of a <span data-fact="valuation.ev_ebitda_multiple"></span>×-EBITDA risk. A wide, swinging orbit.</span></li>
+          <li data-sat="structure" data-name="MARKET STRUCTURE" data-verdict="PRECEDENT SET" data-badge="ESCAPED" data-orbit="escape" data-tone="paper"><span data-role="desc">Not a buyer at all: the IPO playbook itself, and what this deal did to it.</span><span data-role="evidence">Fixed pricing, sub-1% fees, engineered index inclusion — a trajectory out of the old system entirely; others may now follow it.</span></li>
+        </ul>
       </div>
       <div class="container c7__thesis">
         <p><span class="mask-line">Priced efficiently.</span><span class="mask-line">Traded emotionally.</span></p>
@@ -287,15 +381,41 @@
     <!-- ================= C7.5 · THE POSITION (light) ================= -->
     <section class="chapter chapter--light c75" id="c75" data-chapter="07.5 / THE POSITION">
       <div class="container">
-        <p class="mono label">07.5 / THE POSITION</p>
+        <p class="mono label">07.5 / THE POSITION<span class="label__stage">WHERE I STAND</span></p>
         <h2>My view, on the record</h2>
 
-        <div class="placeholder-text">[PADRAIG: your position paragraph here — first person. What the implied-growth requirement below means to you, whether you believe it, and the range you would pay. Being wrong later is acceptable; being viewless is not. — whitepaper §0.5-R1]</div>
+        <header class="c75__byline">
+          <p class="c75__name">Padraig Middleton</p>
+          <p class="mono">ON THE RECORD · 11 JULY 2026 · LAST CLOSE <span id="c75-p-price"></span></p>
+          <p class="c75__byline-note">Everything above is the record. What follows is my read of it — dated, signed, and left up whether it ages well or not.</p>
+        </header>
+
+        <article class="c75__thesis">
+          <p class="mono c75__thesis-tag">I / THE PROMISES</p>
+          <h3>A pitch, not a forecast</h3>
+          <p>My starting point: this valuation is largely based on promises, and whether Musk keeps them is unknown given his track record. That record cuts both ways. Betting against his engineering has repeatedly cost people money, but his timelines rarely land when promised, and the S-1 itself ties a grant of up to <span data-fact="governance.mars_grant_shares_bn"></span> billion additional shares to milestones including a million-resident Mars colony. A <span data-fact="valuation.tam_tn" data-format="tn1"></span> addressable market with ~<span data-fact="valuation.tam_ai_pct"></span>% of it in AI is not a forecast; it is a pitch.</p>
+        </article>
+
+        <article class="c75__thesis">
+          <p class="mono c75__thesis-tag">II / THE PRICE</p>
+          <h3>The <span data-fact="ipo.price" data-format="usd0"></span> was roughly right</h3>
+          <p>Despite this, I think the offering was relatively well priced as of the first few weeks. The <span data-fact="day_one.gain_pct" data-format="pct1"></span> first-day close left about <span data-fact="day_one.money_left_bn" data-format="bn1"></span> on the table, which is small by mega-IPO standards, and a month on the stock still sits above the <span data-fact="ipo.price" data-format="usd0"></span> offer. As a piece of execution, the fixed price was roughly right.</p>
+        </article>
+
+        <article class="c75__thesis">
+          <p class="mono c75__thesis-tag">III / THE TAPE</p>
+          <h3>The aftermarket traded the story</h3>
+          <p>The aftermarket is a different matter. The run to <span data-fact="aftermath.peak" data-format="usd2"></span> and the <span data-fact="aftermath.drawdown_pct" data-format="pct0"></span> give-back look to me largely driven by media hype and the 'Musk Story' rather than by anything that changed in the business, amplified by a float of only ~<span data-fact="aftermath.float_ipo_pct"></span>%. In the future I would expect a volatile stock similar to Tesla, partly because Musk is controversial and partly because the price stays reliant on promises. If, for example, it turns out that data centres in space are not viable, I don't see how the stock value couldn't drop, because outside Starlink the underlying isn't really 'real' per se. Starlink is real: <span data-fact="engines.starlink_rev_bn" data-format="bn1"></span> of revenue at <span data-fact="engines.starlink_margin"></span> EBITDA margins. It does not carry a near-two-trillion-dollar company on its own. The rest is expectation, and I think the underlying assets and expectations may not be held to account for a long time, because the marginal buyer here is reactive and follows the story: <span data-fact="ipo.retail_pct"></span>% of the deal went to retail, and the index funds were engineered in.</p>
+        </article>
 
         <!-- Implied-growth interactive: the real §10.3 maths, wired in c75-position.js -->
         <div class="c75__calc">
+          <p class="mono c75__calc-kicker">THE ARITHMETIC</p>
+          <h3 class="c75__calc-title">What today's price demands</h3>
+          <p class="c75__calc-explain">One dial — the EV/EBITDA multiple the market pays in 2030. The EBITDA needed to justify today's price, and the growth it takes to get there from 2025, both follow.</p>
           <label for="c75-multiple" class="mono">EXIT EV/EBITDA MULTIPLE, 2030 → <span id="c75-multiple-out">25×</span></label>
           <input type="range" id="c75-multiple" min="10" max="60" step="1" value="25" />
+          <div class="c75__scale mono"><span>10× · MEGA-CAP FLOOR</span><span>60× · STORY MULTIPLE</span></div>
           <div class="c75__readouts">
             <div><span class="mono">REQUIRED 2030 EBITDA</span><strong id="c75-ebitda">—</strong></div>
             <div><span class="mono">IMPLIED EBITDA CAGR</span><strong id="c75-cagr">—</strong></div>
@@ -303,12 +423,18 @@
           <p class="c75__basis" id="c75-basis"><!-- valuation basis line, filled from data --></p>
         </div>
 
-        <div class="placeholder-text">[PADRAIG: your stated fair-value range here, e.g. "the range I'd pay is $X–$Y, because…"]</div>
+        <aside class="c75__pull">“I will not underwrite promises.”</aside>
+
+        <article class="c75__thesis">
+          <p class="mono c75__thesis-tag">IV / THE RANGE</p>
+          <h3>What I would pay</h3>
+          <p>At the last close the market is implying a value of about <span id="c75-p-ev"></span> on the offering share base. Hold that price, assume the multiple normalises to 25× EBITDA by 2030, and the business needs roughly <span id="c75-p-ebitda"></span> of EBITDA by then: a compound growth rate of about <span id="c75-p-cagr"></span> a year for five years from 2025's <span data-fact="valuation.ebitda_2025_bn" data-format="bn1"></span>. I will not underwrite that on promises. I would underwrite something closer to 50 to 55% a year, which is still hyper-growth, and still assumes Starlink keeps compounding and some of the AI story lands. At the same 25× exit that puts my range at roughly <span id="c75-p-low"></span> to <span id="c75-p-high"></span> a share. The <span data-fact="ipo.price" data-format="usd0"></span> offer sat just above it, close enough to call efficient; the aftermarket did not. So I am not a buyer at today's price, I would be interested near the top of my range, and if the lockup waves push it below the bottom I would expect to be buying volatility rather than chasing it. If data centres in space stall, all of this is too high, and I accept that being on the record means being wrong in public.</p>
+        </article>
 
         <!-- The Watch (§0.5-R2): dated predictions, immutable once made -->
         <div class="watch">
           <h3>The Watch</h3>
-          <p class="lede" style="margin:16px 0 32px">The deal is unfinished. Each upcoming event, my expectation date-stamped before it happens — left on the record afterwards, right or wrong.</p>
+          <p class="lede">The deal is unfinished. Each upcoming event, my expectation date-stamped before it happens — left on the record afterwards, right or wrong.</p>
           <div id="c75-watch"><!-- rendered from data/watch.json --></div>
         </div>
       </div>
@@ -317,7 +443,7 @@
     <!-- ================= C8 · COLOPHON + METHOD (light) ================= -->
     <section class="chapter chapter--light c8" id="c8" data-chapter="08 / COLOPHON">
       <div class="container">
-        <p class="mono label">08 / COLOPHON &amp; METHOD</p>
+        <p class="mono label">08 / COLOPHON &amp; METHOD<span class="label__stage">THE TELEMETRY</span></p>
         <h2>The workings</h2>
 
         <h3>Sources &amp; retrieval dates</h3>
@@ -338,7 +464,7 @@
           <p class="mono">ESCAPE VELOCITY · JULY 2026</p>
           <p class="mono">RESEARCH, ANALYSIS &amp; BUILD — PADRAIG</p>
           <p class="mono"><a href="#top">PORTFOLIO [PADRAIG: link your landing page]</a></p>
-          <p class="mono"><a href="mailto:padraig@zaltek.co.uk">PADRAIG@ZALTEK.CO.UK</a></p>
+          <p class="mono"><a href="mailto:padraigmiddleton@gmail.com">PADRAIGMIDDLETON@GMAIL.COM</a></p>
         </footer>
       </div>
     </section>

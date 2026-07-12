@@ -1,18 +1,130 @@
-/* C0 · HERO — full-viewport dark opener. Headline over the IMG-01 backdrop. */
-.c0 { min-height: 100vh; display: flex; align-items: flex-end; padding-bottom: 12vh; }
+/* C0 · HERO — the shader dawn (src/lib/ascent-scene.js) fills the whole
+   viewport; the content is one full-height column: masthead pinned to the
+   top hairline, the headline centred like a title page, telemetry strip
+   of the deal's four numbers along the bottom. */
+.c0 {
+  min-height: 100svh;
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+  /* the sky, approximated in CSS — what no-JS and no-WebGL visitors see,
+     and what paints behind the canvas while it fades in */
+  background:
+    radial-gradient(90% 40% at 56% 102%, color-mix(in srgb, var(--sky-horizon) 42%, transparent), transparent 70%),
+    linear-gradient(0deg, var(--sky-mid) 0%, var(--sky-top) 60%);
+}
+
+.c0__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.c0__frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  width: 100%;
+  padding-top: clamp(20px, 3vh, 34px);
+  padding-bottom: clamp(20px, 3.5vh, 40px);
+}
+
+/* ---- masthead on the top hairline ---- */
+.c0__mast {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  color: var(--muted);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--hairline-d);
+}
+
+/* ---- the title page ---- */
+.c0__centre {
+  margin: auto 0;          /* true optical centre between mast and telemetry */
+  text-align: center;
+  padding: clamp(20px, 4vh, 48px) 0;
+}
+
+.c0__kicker {
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.c0__kicker::before,
+.c0__kicker::after {
+  content: '';
+  width: clamp(20px, 4vw, 44px);
+  height: 1px;
+  background: var(--hairline-d);
+}
 
 .c0__headline {
-  font-size: var(--size-h1);
-  margin: 28px 0 20px;
+  /* scales with width, but never so tall the frame can't close in one
+     viewport — the telemetry strip must stay above the fold */
+  font-size: clamp(54px, min(10.5vw, 17vh), 168px);
+  margin: clamp(14px, 2.6vh, 30px) auto clamp(12px, 2.4vh, 26px);
 }
 
 /* Each headline line sits in its own block so the mask-reveal clips per line */
 .c0 .mask-line { display: block; }
 
-.c0__sub { color: var(--muted); max-width: 46ch; }
+.c0__sub {
+  color: var(--paper-txt);
+  opacity: 0.72;
+  max-width: 46ch;
+  margin: 0 auto;
+}
 
+/* scroll cue: the word, then a hairline a light travels down */
 .c0__cue {
   color: var(--muted);
-  margin-top: 8vh;
-  display: inline-block;
+  margin-top: clamp(20px, 4.5vh, 60px);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.c0__cue::after {
+  content: '';
+  width: 1px;
+  height: clamp(30px, 6vh, 44px);
+  background: linear-gradient(to bottom, transparent, var(--paper-txt), transparent);
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+  animation: c0-scan 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes c0-scan {
+  from { background-position: 0 -100%; }
+  to   { background-position: 0 200%; }
+}
+
+/* ---- telemetry strip ---- */
+.c0__rule {
+  display: block;
+  height: 1px;
+  background: var(--hairline-d);
+}
+
+.c0__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gutter);
+  padding-top: 18px;
+}
+
+.c0__stat dt { color: var(--muted); }
+.c0__stat dd {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(20px, 2vw, 27px);
+  letter-spacing: -0.01em;
+  margin-top: 4px;
+}
+
+@media (max-width: 720px) {
+  .c0__mast-mid { display: none; }
+  .c0__stats { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
 }

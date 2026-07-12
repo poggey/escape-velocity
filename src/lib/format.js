@@ -11,7 +11,10 @@ export const fmt = {
   tn:   (v) => sign(v) + '$' + Math.abs(v).toFixed(2) + 'T',   // 1.77  -> $1.77T
   tn1:  (v) => sign(v) + '$' + Math.abs(v).toFixed(1) + 'T',   // 28.5  -> $28.5T
   bn0:  (v) => sign(v) + '$' + Math.round(Math.abs(v)) + 'BN', // 75    -> $75BN
-  bn1:  (v) => sign(v) + '$' + Math.abs(v).toFixed(1) + 'BN',  // 11.4  -> $11.4BN
+  // sub-billion values read as millions ($0.5BN would look like a typo)
+  bn1:  (v) => Math.abs(v) < 1
+    ? sign(v) + '$' + Math.round(Math.abs(v) * 1000) + 'M'     // 0.5   -> $500M
+    : sign(v) + '$' + Math.abs(v).toFixed(1) + 'BN',           // 11.4  -> $11.4BN
   x:    (v) => Math.round(v) + '×',                            // 94    -> 94×
   pct0: (v) => (v > 0 ? '+' : sign(v)) + Math.round(Math.abs(v)) + '%',  // -32 -> −32%
   pct1: (v) => (v > 0 ? '+' : sign(v)) + Math.abs(v).toFixed(1) + '%',   // 19.2 -> +19.2%

@@ -1,21 +1,57 @@
-/* C5 · LISTING DAY — the pinned chapter. One viewport: intraday line + live counters. */
+/* C5 · LISTING DAY — the pinned chapter, redesigned as a night terminal:
+   the lumen sky behind, the session instrument glowing over near-black,
+   the traded line burning market-green. One viewport: chart + live counters. */
 .c5__stage {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 40px;
+  gap: clamp(18px, 3vh, 30px);
 }
 
 .c5__readout { display: flex; gap: 8vw; }
-.c5__readout .numeral { font-size: clamp(48px, 6vw, 96px); }
+.c5__readout .numeral { font-size: clamp(44px, 5.2vw, 84px); }
 .c5__readout .mono { color: var(--muted); }
 
-.c5 .chart { width: 100%; height: auto; }
-.c5 .chart .line { stroke: var(--gain); stroke-width: 2.5; fill: none; }
-.c5 .chart .baseline { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 6; }
-.c5 .chart .anchor { fill: var(--ink); }
-.c5 .chart .head { fill: var(--gain); }
+/* the whole stage must hold inside the pinned viewport, so the chart
+   yields height rather than pushing the foot rows off screen */
+.c5 .chart { width: 100%; height: auto; max-height: 48vh; }
+
+/* zones */
+.c5 .chart .void-zone { fill: color-mix(in srgb, var(--paper-txt) 4%, transparent); }
+.c5 .chart .bell { stroke: var(--hairline-d); stroke-width: 1; }
+
+/* frame */
+.c5 .chart .grid { stroke: var(--hairline-d); stroke-width: 1; }
+.c5 .chart .tick { stroke: var(--muted); stroke-width: 1; }
+
+/* the $135 pricing baseline: the dawn line the session lifted from */
+.c5 .chart .baseline {
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 60%, transparent));
+}
+
+/* the traded line and its tinted gain area — luminous over the night sky */
+.c5 .chart .line {
+  stroke: var(--gain);
+  stroke-width: 2.5;
+  fill: none;
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--gain) 65%, transparent));
+}
+.c5 .chart .gain-area { fill: color-mix(in srgb, var(--gain) 10%, transparent); }
+
+/* prints */
+.c5 .chart .anchor { fill: var(--paper-txt); }
+.c5 .chart .anchor--hollow { fill: none; stroke: var(--paper-txt); stroke-width: 1.5; }
+
+/* the head: solid gain dot over a soft glow */
+.c5 .chart .head { fill: var(--gain); filter: drop-shadow(0 0 8px var(--gain)); }
+.c5 .chart .head-glow { fill: color-mix(in srgb, var(--gain) 25%, transparent); }
+
+/* emphasised chart labels ($135, the close) read near-white, not muted */
+.c5 .chart text.em { fill: var(--paper-txt); }
 
 .c5__foot { display: flex; flex-wrap: wrap; gap: 10px 40px; }
 .c5__foot .mono { color: var(--muted); text-transform: none; letter-spacing: 0.06em; }

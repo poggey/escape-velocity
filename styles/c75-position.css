@@ -1,4 +1,48 @@
-/* C7.5 · THE POSITION — reads as writing, not spectacle (§13). Slider + Watch panel. */
+/* C7.5 · THE POSITION — reads as writing, not spectacle (§13).
+   Byline, four titled theses, the calculator, the Watch timeline. */
+
+/* ---- the byline: whose words these are, signed and dated ---- */
+.c75__byline {
+  border-top: 2px solid var(--ink);
+  margin: 40px 0 8px;
+  padding-top: 20px;
+  max-width: 62ch;
+}
+.c75__name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--size-h3);
+  margin-bottom: 8px;
+}
+.c75__byline .mono { color: var(--muted); }
+.c75__byline .mono span { color: var(--ink); }
+.c75__byline-note { color: var(--muted); font-size: 14px; margin-top: 12px; max-width: 52ch; }
+
+/* ---- the theses: the statement broken into four signed arguments ---- */
+.c75__thesis { max-width: 62ch; margin: 48px 0; }
+.c75__thesis-tag { color: var(--accent); margin-bottom: 10px; }
+.c75__thesis h3 { margin-bottom: 14px; }
+.c75__thesis p { margin-bottom: 20px; }
+/* every quoted figure reads as an instrument mark inside the prose */
+.c75__thesis p [data-fact],
+.c75__thesis p [id^='c75-p-'] {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* ---- the pull-quote: the position in six words ---- */
+.c75__pull {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(24px, 3vw, 40px);
+  letter-spacing: var(--display-tracking);
+  border-left: 2px solid var(--accent);
+  padding-left: 24px;
+  margin: 56px 0;
+  max-width: 20ch;
+}
+
 .c75 .placeholder-text {
   background: var(--surface);
   border: 1px dashed var(--hairline-l);
@@ -9,25 +53,75 @@
   max-width: 62ch;
 }
 
-/* ---- implied-growth interactive ---- */
-.c75__calc { background: var(--surface); padding: 40px; margin: 64px 0; max-width: 760px; }
-.c75__calc label { display: block; margin-bottom: 20px; }
-.c75__calc input[type='range'] { width: 100%; accent-color: var(--ink); }
+/* ---- implied-growth interactive: a dark instrument panel set into the
+   light page — the hero's night sky powering the site's one calculator ---- */
+.c75__calc {
+  background:
+    radial-gradient(85% 70% at 50% 112%, color-mix(in srgb, var(--sky-horizon) 22%, transparent), transparent 70%),
+    linear-gradient(0deg, var(--sky-mid) -40%, var(--sky-top) 75%);
+  color: var(--paper-txt);
+  padding: 40px;
+  margin: 48px 0;
+  max-width: 760px;
+}
+.c75__calc-kicker { color: var(--muted); margin-bottom: 12px; }
+.c75__calc-title { color: var(--paper-txt); margin-bottom: 10px; }
+.c75__calc-explain { color: var(--muted); font-size: 14px; margin-bottom: 28px; max-width: 52ch; }
+.c75__calc label { display: block; margin-bottom: 20px; color: var(--muted); }
+.c75__calc label span { color: var(--accent-hot); }
+.c75__calc input[type='range'] { width: 100%; accent-color: var(--accent); }
+.c75__scale { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; margin-top: 8px; }
 .c75__readouts { display: flex; gap: 48px; flex-wrap: wrap; margin-top: 24px; }
 .c75__readouts strong {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 300;
   font-size: clamp(28px, 3.4vw, 48px);
   display: block;
   font-variant-numeric: tabular-nums;
+  color: var(--accent-hot);
+  text-shadow: var(--glow-amber);
 }
 .c75__readouts .mono { color: var(--muted); }
 .c75__basis { color: var(--muted); font-size: 13px; margin-top: 20px; max-width: 60ch; }
 
-/* ---- The Watch ---- */
-.watch { margin-top: 96px; }
-.watch-item { border-top: 1px solid var(--hairline-l); padding: 20px 0; display: grid; grid-template-columns: 120px 1fr; gap: 24px; }
-.watch-item .mono { color: var(--muted); }
-.watch-item .prediction { font-style: italic; color: var(--muted); }
-.watch-item .outcome { font-size: 14px; }
+/* ---- The Watch: a timeline of dated calls ---- */
+.watch { margin-top: 64px; }
+.watch .lede { margin: 16px 0 32px; }
+#c75-watch { border-left: 1px solid var(--hairline-l); }
+.watch-item {
+  position: relative;
+  padding: 20px 0 20px 28px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+}
+/* each event is a node on the rail; it lights amber once the call is made */
+.watch-item::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 28px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.watch-item--dated::before,
+.watch-item--resolved::before { background: var(--accent); }
+.watch-item > .mono:first-child { color: var(--accent); } /* the date, in dawn amber */
+.watch-item h3 { margin-bottom: 8px; }
+.watch-item .prediction { font-style: italic; color: var(--muted); margin-bottom: 12px; }
+.watch-item .prediction--tbd { opacity: 0.7; }
+.watch-item .outcome { font-size: 14px; margin-top: 10px; }
+.watch-item__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.watch-chip {
+  border: 1px solid var(--hairline-l);
+  padding: 2px 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.watch-chip--dated {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
 @media (max-width: 560px) { .watch-item { grid-template-columns: 1fr; gap: 6px; } }

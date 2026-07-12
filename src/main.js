@@ -4,13 +4,12 @@
    index.html and exports a single initChapter() (§14.2).
    ============================================================ */
 
-// Self-hosted fonts (§12): Space Grotesk display 300/500, Inter body,
-// JetBrains Mono for every number, label and axis
+// Self-hosted fonts (§12, amended): Space Grotesk for display AND labels
+// (typewriter faces removed sitewide), Inter for body
 import '@fontsource/space-grotesk/300.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
-import '@fontsource/jetbrains-mono/400.css';
 
 // Styles: tokens first (everything else consumes them), then base,
 // shared components, and one small file per scene (§14.6)
@@ -66,3 +65,13 @@ buildProgressMeter();
 // Everything above may have changed section heights (charts, watch items,
 // placeholders) — re-measure all trigger positions once at the end
 ScrollTrigger.refresh();
+
+// dev-only: ?at=c3 brings a section into the viewport AFTER layout settles —
+// lets headless screenshot tooling capture any chapter deterministically.
+// Uses a transform, not scrolling: headless Chrome paints black at real
+// scroll offsets, and a transform sidesteps the compositor entirely.
+if (import.meta.env.DEV) {
+  const at = new URLSearchParams(location.search).get('at');
+  const el = at && document.getElementById(at);
+  if (el) document.body.style.transform = `translateY(${-el.offsetTop}px)`;
+}

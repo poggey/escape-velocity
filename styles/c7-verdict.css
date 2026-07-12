@@ -1,13 +1,167 @@
-/* C7 · THE VERDICT — six-constituency ledger over IMG-06, then the thesis line. */
-.c7 .rule-table { margin-top: 72px; }
-.c7 .rule-table td { font-size: 15px; }
-.c7 td.constituency { font-family: var(--font-display); font-weight: 500; font-size: 18px; width: 26%; }
-.c7 td.verdict-word { width: 20%; }
-.c7 td.verdict-word .mono { color: var(--paper-txt); }
-.c7 td.evidence { color: var(--muted); }
+/* C7 · THE VERDICT — the ascent map: the hero's limb-of-Earth world as a
+   full-width instrument. Altitude bands, six flown trajectories, a glass
+   readout. Then the thesis line. The lumen sky mounts behind everything. */
+
+.c7 { overflow: hidden; }
+
+/* the how-to-read line under the lede */
+.c7__key { color: var(--muted); margin-top: 18px; }
+
+/* ---- the map: full-bleed, tall ---- */
+.c7__map {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(32px, 5vh, 64px);
+}
+.c7 #c7-orbit {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- scenery ---- */
+.c7-earth { fill: color-mix(in srgb, var(--sky-top) 70%, var(--black)); }
+.c7-rim {
+  fill: none;
+  stroke: var(--accent-hot);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 6px var(--accent));
+}
+.c7-atmo { fill: none; }
+.c7-atmo--plum { stroke: var(--sky-mid); opacity: 0.55; filter: blur(28px); }
+.c7-atmo--amber { stroke: var(--accent); opacity: 0.5; filter: blur(14px); }
+
+.c7-band {
+  fill: none;
+  stroke: var(--hairline-d);
+  stroke-width: 1;
+  stroke-dasharray: 3 9;
+}
+.c7-band-label,
+.rocket-label {
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+}
+.c7-band-label { fill: var(--muted); opacity: 0.85; }
+
+/* ---- the rockets ---- */
+.rocket { cursor: pointer; outline: none; transition: opacity 0.35s var(--ease-out); }
+.rocket.is-dim { opacity: 0.30; }
+.rocket:focus-visible .rocket-trace { stroke: var(--muted); }
+
+.rocket-trace {
+  fill: none;
+  stroke: color-mix(in srgb, var(--paper-txt) 26%, transparent);
+  stroke-width: 1;
+}
+.rocket.is-selected .rocket-trace {
+  stroke: color-mix(in srgb, var(--accent) 75%, var(--paper-txt));
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 70%, transparent));
+}
+
+/* generous invisible stroke so the whole trajectory is tappable */
+.rocket-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 30;
+  pointer-events: stroke;
+}
+
+.rocket-trail {
+  fill: none;
+  stroke: var(--accent-hot);
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 5px var(--accent));
+}
+
+.rocket-halo { fill: color-mix(in srgb, var(--accent) 35%, transparent); filter: blur(3px); }
+.rocket-spark { fill: var(--paper-txt); filter: drop-shadow(0 0 6px var(--accent-hot)); }
+.rocket--gain .rocket-spark { fill: var(--gain); filter: drop-shadow(0 0 6px var(--gain)); }
+.rocket--loss .rocket-spark { fill: var(--loss); filter: drop-shadow(0 0 6px var(--loss)); }
+.rocket.is-selected .rocket-spark { r: 6; }
+.rocket.is-selected .rocket-halo { r: 15; }
+
+.rocket-label { fill: var(--paper-txt); opacity: 0.6; transition: opacity 0.3s var(--ease-out); }
+.rocket:hover .rocket-label,
+.rocket.is-selected .rocket-label { opacity: 1; fill: var(--accent-hot); }
+
+/* ---- the readout: a glass card floating over the sky ---- */
+.c7__readout {
+  position: absolute;
+  top: 0;
+  right: var(--gutter);
+  width: min(360px, 34vw);
+  border: 1px solid var(--hairline-d);
+  background: color-mix(in srgb, var(--black) 55%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 26px;
+}
+.readout__name { color: var(--muted); margin-bottom: 10px; }
+.readout__verdict {
+  color: var(--accent-hot);
+  text-shadow: var(--glow-soft);
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+}
+.readout__verdict--gain { color: var(--gain); text-shadow: 0 0 24px color-mix(in srgb, var(--gain) 45%, transparent); }
+.readout__verdict--loss { color: var(--loss); text-shadow: 0 0 24px color-mix(in srgb, var(--loss) 45%, transparent); }
+.readout__desc { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+.readout__evidence { color: var(--paper-txt); opacity: 0.85; font-size: 15px; }
+
+@media (max-width: 860px) {
+  .c7__readout {
+    position: static;
+    width: auto;
+    min-height: 170px; /* the auto-cycle must not reflow the page */
+    margin: 20px var(--gutter) 0;
+    background: color-mix(in srgb, var(--panel) 80%, transparent);
+  }
+}
+
+/* legend chips double as the accessible way in on touch */
+.c7__legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.c7__legend button {
+  background: none;
+  border: 1px solid var(--hairline-d);
+  color: var(--muted);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+.c7__legend button:hover,
+.c7__legend button.is-selected {
+  color: var(--accent-hot);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+/* the verdict rides on every chip — the six outcomes scan with no clicks */
+.chip__badge {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent-hot);
+  opacity: 0.9;
+}
+.chip__badge--gain { color: var(--gain); }
+.chip__badge--loss { color: var(--loss); }
+
+/* SVG text scales with the 1200-unit viewBox: at phone width the 12px
+   labels render ~4px. Set them in viewBox units the frame can afford. */
+@media (max-width: 700px) {
+  .c7-band-label,
+  .rocket-label { font-size: 26px; letter-spacing: 0.08em; }
+  .rocket-hit { stroke-width: 60; }
+}
 
 .c7__thesis {
-  min-height: 90vh;
+  min-height: 55vh;
   display: flex;
   align-items: center;
 }
@@ -20,8 +174,3 @@
   max-width: 16ch;
 }
 .c7__thesis .mask-line { display: block; }
-
-@media (max-width: 720px) {
-  .c7 tr { display: block; padding: 16px 0; border-bottom: 1px solid var(--hairline-d); }
-  .c7 .rule-table td { display: block; width: auto !important; border: 0; padding: 3px 0; }
-}

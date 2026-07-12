@@ -2,6 +2,14 @@
 .interlude { position: relative; padding: 0; overflow: hidden; }
 
 .interlude .media--wide { position: relative; }
+
+/* The pull-quote must survive whatever brightness the image throws at it */
+.interlude .media--wide::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--black);
+  opacity: 0.45;
+}
 .interlude .media--wide .img-placeholder { aspect-ratio: 21 / 9; }
 .interlude .media--wide img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
 

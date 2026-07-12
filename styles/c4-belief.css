@@ -1,6 +1,37 @@
-/* C4 · THE PRICE OF BELIEF — monumental stat sequence, one viewport per number. */
-.c4 .monument .caption { color: var(--muted); max-width: 44ch; }
-.c4 .monument .mono { color: var(--muted); }
+/* C4 · THE PRICE OF BELIEF — the monumental stat sequence over the pre-dawn
+   rocket (IMG-01, moved here from the old hero). Heavy dim + near-white
+   supporting text so the numbers stay legible over photography. */
+.c4 { --scrim-dim: 0.72; }
+
+.c4 .monument .caption { color: var(--paper-txt); opacity: 0.85; max-width: 44ch; }
+.c4 .monument .mono { color: var(--paper-txt); opacity: 0.6; }
+
+/* The 94×-in-context scale: two bands on one 0–94× track */
+.c4__scale { max-width: 760px; margin: 8px 0; display: grid; gap: 16px; }
+.c4__scale-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 210px) 1fr 72px;
+  gap: 18px;
+  align-items: center;
+}
+.c4__scale-row > .mono { color: var(--paper-txt); opacity: 0.6; }
+.c4__scale-val { text-align: right; }
+.c4__scale-track {
+  position: relative;
+  height: 12px;
+  background: color-mix(in srgb, var(--paper-txt) 8%, transparent);
+}
+.c4__scale-fill { position: absolute; top: 0; bottom: 0; }
+.c4__scale-fill--peers { background: color-mix(in srgb, var(--paper-txt) 45%, transparent); }
+/* SPCX runs the full track in burning amber — the luminous outlier */
+.c4__scale-fill--spcx {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 55%, var(--black)), var(--accent-hot));
+  box-shadow: var(--glow-amber);
+}
+@media (max-width: 600px) {
+  .c4__scale-row { grid-template-columns: 1fr 60px; }
+  .c4__scale-row > .mono:first-child { grid-column: 1 / -1; margin-bottom: -8px; }
+}
 
 /* The $63 vs $236 duel: two numerals side by side */
 .c4__duel { display: flex; gap: 8vw; flex-wrap: wrap; align-items: baseline; }

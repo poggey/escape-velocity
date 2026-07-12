@@ -1,5 +1,5 @@
 /* C8 · COLOPHON + METHOD — set like the credits page of a printed annual report. */
-.c8 h3 { margin: 72px 0 24px; }
+.c8 h3 { margin: 48px 0 20px; }
 
 .c8 .rule-table td { font-size: 14px; }
 .c8 .rule-table td:first-child { white-space: nowrap; color: var(--muted); }
@@ -8,6 +8,7 @@
 .c8 ul { list-style: none; }
 .c8 ul li { border-top: 1px solid var(--hairline-l); padding: 14px 0; font-size: 14px; color: var(--muted); max-width: 80ch; }
 
-.c8__credits { margin-top: 120px; display: flex; flex-wrap: wrap; gap: 12px 48px; }
+.c8__credits { margin-top: 72px; display: flex; flex-wrap: wrap; gap: 12px 48px; }
 .c8__credits .mono { color: var(--muted); }
-.c8__credits a { color: var(--ink); }
+.c8__credits a { color: var(--ink); text-decoration-color: var(--accent); }
+.c8 a:hover { color: var(--accent); }

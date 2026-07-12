@@ -47,25 +47,48 @@ h1, h2, h3, .display {
 h2 { font-size: var(--size-h2); }
 h3 { font-size: var(--size-h3); font-weight: 500; }
 
+/* .mono is the historical class name for the small technical label style;
+   it is set in the grotesk at weight 500 now, not a typewriter face */
 .mono {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
+  font-weight: 500;
   font-size: var(--size-label);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 
-/* Chapter label (§12 signature motif): small-caps mono + hairline to the margin */
+/* Chapter label (§12 signature motif): a dawn-amber tick, small-caps mono,
+   and a hairline to the margin — the accent that ties every chapter back
+   to the hero's horizon */
 .label {
   color: var(--muted);
   display: flex;
   align-items: center;
   gap: 16px;
 }
+.label::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--accent);
+  flex: none;
+}
+.chapter--dark .label::before { box-shadow: var(--glow-amber); }
 .label::after { content: ''; flex: 1; height: 1px; background: var(--hairline-l); }
 .chapter--dark .label::after { background: var(--hairline-d); }
+/* the ascent stage, right of the hairline: the site read as one launch arc.
+   order pushes the span past the ::after rule (flex order 0), so the
+   hairline stretches between the chapter number and the stage name. */
+.label__stage { order: 2; color: var(--accent); }
+
+::selection { background: color-mix(in srgb, var(--accent) 70%, transparent); color: var(--white); }
 
 .lede { max-width: 62ch; color: inherit; }
 .muted { color: var(--muted); }
+
+/* consistent vertical rhythm after chapter labels and headings —
+   chapters get this for free instead of carrying inline margins */
+.label + h2 { margin-top: 26px; }
+.label + .lede, h2 + .lede { margin-top: 22px; }
 
 /* Keyboard users get a visible focus ring (§14.9) */
 :focus-visible { outline: 2px solid var(--muted); outline-offset: 3px; }
