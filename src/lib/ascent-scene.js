@@ -50,9 +50,10 @@ float ascent(vec2 p, vec2 C, float R, float time, float cycle, float seed) {
   float pad = floor(hash21(vec2(ci, seed)) * 5.0);     // 0..4, varies per cycle
   float az = -0.38 + pad * 0.12;                       // pad azimuths along the limb
   vec2 A = C + normalize(vec2(az, 1.0)) * R;           // launch point on the limb
-  vec2 B = A + vec2(0.06, 0.55);                       // rises vertically at first...
-  float bend = 0.55 + hash21(vec2(ci, seed + 9.1)) * 0.6; // ...then bends east by a varying amount
-  vec2 D = vec2(A.x * 0.4 + bend, 1.05);               // exits high
+  float dir = step(0.45, hash21(vec2(ci, seed + 17.3))) * 2.0 - 1.0; // ~45% bend west
+  vec2 B = A + vec2(0.06 * dir, 0.55);                 // rises vertically at first...
+  float bend = 0.55 + hash21(vec2(ci, seed + 9.1)) * 0.6; // ...then bends by a varying amount,
+  vec2 D = vec2(A.x * 0.4 + bend * dir, 1.05);         // east or west — paths may cross
   float t = fract(time / cycle);
   float sTip = pow(smoothstep(0.03, 0.93, t), 1.7);    // holds, then accelerates away
   float fade = smoothstep(0.0, 0.05, t) * (1.0 - smoothstep(0.88, 1.0, t));

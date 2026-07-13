@@ -1,8 +1,14 @@
 /* C5 · LISTING DAY — the pinned chapter, redesigned as a night terminal:
    the lumen sky behind, the session instrument glowing over near-black,
    the traded line burning market-green. One viewport: chart + live counters. */
+
+/* The section IS the stage: no chapter padding, so the pin (start: 'top top')
+   locks with the whole terminal framed — nothing above the fold, nothing cut */
+.c5 { padding: 0; }
 .c5__stage {
-  min-height: 100vh;
+  height: 100svh;
+  padding-top: clamp(24px, 4vh, 48px);
+  padding-bottom: clamp(24px, 4vh, 48px);
   display: flex;
   flex-direction: column;
   justify-content: center;

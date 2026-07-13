@@ -4,7 +4,27 @@
 .c8 .rule-table td { font-size: 14px; }
 .c8 .rule-table td:first-child { white-space: nowrap; color: var(--muted); }
 
-.c8__discrepancies .watch-item { grid-template-columns: 220px 1fr; }
+/* the discrepancy register: topic column, then versions + treatment */
+.register-item {
+  position: relative;
+  padding: 20px 0 20px 28px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+}
+.register-item::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 28px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.register-item > .mono:first-child { color: var(--accent); }
+.c8__discrepancies { border-left: 1px solid var(--hairline-l); }
+@media (max-width: 560px) { .register-item { grid-template-columns: 1fr; gap: 6px; } }
 .c8 ul { list-style: none; }
 .c8 ul li { border-top: 1px solid var(--hairline-l); padding: 14px 0; font-size: 14px; color: var(--muted); max-width: 80ch; }
 

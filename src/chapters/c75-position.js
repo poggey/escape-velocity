@@ -1,23 +1,20 @@
 /* ============================================================
    C7.5 · THE POSITION (light) — required by whitepaper §0.5-R1/R2.
    What it looks like: a chapter that reads as writing. Padraig's
-   position paragraphs (his words, on the record 11 July 2026),
-   the implied-growth interactive (exit-multiple slider → required
-   2030 EBITDA and CAGR), and The Watch — dated predictions on
-   the live events, rendered from data/watch.json.
+   position paragraphs (his words, on the record 11 July 2026)
+   and the implied-growth interactive (exit-multiple slider →
+   required 2030 EBITDA and CAGR).
    What it does: almost nothing moves (§13: "reads as writing,
    not spectacle"). The slider runs the real §10.3 maths live.
    ============================================================ */
 import { fillFacts, facts } from '../lib/facts.js';
 import { fmt } from '../lib/format.js';
 import daily from '../../data/spcx_daily.json';
-import watch from '../../data/watch.json';
 
 export function initChapter() {
   const c75 = document.querySelector('#c75');
   fillFacts(c75); // the position paragraphs quote figures via data-fact spans
   initCalculator(c75);
-  renderWatch(c75);
 }
 
 function initCalculator(c75) {
@@ -71,31 +68,4 @@ function initCalculator(c75) {
     `~${fmt.tn(evBn / 1000)} implied value, against ${fmt.bn1(ebitdaBn)} 2025 adjusted EBITDA, ` +
     `${years}-year horizon to 2030. See C8 for the valuation-vs-market-cap caveat.` +
     (daily.is_stub ? ' Price is STUB data until the analysis notebook is run.' : '');
-}
-
-function renderWatch(c75) {
-  const wrap = c75.querySelector('#c75-watch');
-  for (const item of watch.items) {
-    const row = document.createElement('article');
-    // prediction_made is IMMUTABLE once set (whitepaper §0.5-R2): the site
-    // only ever displays it, and outcomes are appended — never edited in
-    const status = item.outcome ? 'resolved' : item.prediction_made ? 'dated' : 'pending';
-    row.className = `watch-item watch-item--${status}`;
-    // editor notes ([PADRAIG: ...]) never reach the page
-    const prediction = item.prediction.startsWith('[PADRAIG')
-      ? '<p class="prediction prediction--tbd">Prediction to be entered — it will be date-stamped before the event.</p>'
-      : `<p class="prediction">${item.prediction}</p>`;
-    const dated = item.prediction_made
-      ? `<span class="watch-chip watch-chip--dated mono">PREDICTED ${item.prediction_made}</span>`
-      : '<span class="watch-chip mono">AWAITING PREDICTION</span>';
-    const outcome = item.outcome
-      ? `<span class="watch-chip watch-chip--dated mono">OUTCOME (${item.outcome_date})</span><p class="outcome">${item.outcome}</p>`
-      : '<span class="watch-chip mono">OUTCOME · PENDING</span>';
-    row.innerHTML =
-      `<p class="mono">${item.event_date}</p>` +
-      `<div><h3>${item.event}</h3>` +
-      prediction +
-      `<div class="watch-item__chips">${dated}${outcome}</div></div>`;
-    wrap.appendChild(row);
-  }
 }

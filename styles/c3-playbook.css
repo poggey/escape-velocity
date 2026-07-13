@@ -1,125 +1,85 @@
-/* C3 · BREAKING THE PLAYBOOK — the deviation board. Five tabs on the
-   left; the display is a dark star-lit instrument panel (the hero's sky
-   in miniature, embedded in the light chapter) where the SpaceX track
-   burns away from the dashed convention line. */
+/* C3 · BREAKING THE PLAYBOOK — the divergence board. All five deviations
+   at once, one hairline-ruled row each on the gallery-white page. A row
+   reads: name + chip · convention (muted) · mini-fork · SpaceX (amber).
+   The fork bends away harder the further the dial was turned. */
 
-.c3__board {
-  margin-top: 48px;
+.c3__board { margin-top: 48px; border-top: 1px solid var(--hairline-l); }
+
+/* shared row grid: who | convention | fork | spacex */
+.c3__colhead,
+.c3__row {
   display: grid;
-  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
-  border: 1px solid var(--hairline-l);
-  background: var(--white);
+  grid-template-columns: minmax(128px, 0.62fr) minmax(0, 1fr) 150px minmax(0, 1.3fr);
+  gap: clamp(16px, 2.6vw, 44px);
+  align-items: start;
 }
-@media (max-width: 860px) { .c3__board { grid-template-columns: 1fr; } }
 
-/* ---- the tabs ---- */
-.c3__tabs { display: flex; flex-direction: column; }
-.c3__tab {
-  appearance: none;
-  background: none;
-  border: 0;
-  border-bottom: 1px solid var(--hairline-l);
-  border-left: 3px solid transparent;
-  text-align: left;
-  padding: 20px 22px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  transition: background 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
-}
-.c3__tab:last-child { border-bottom: 0; }
-.c3__tab:hover { background: var(--surface); }
-.c3__tab.is-selected {
-  border-left-color: var(--accent);
-  background: var(--surface);
-}
-.c3__tab-name { color: var(--ink); }
-.c3__tab.is-selected .c3__tab-name { color: var(--accent); }
-.c3__tab-chip {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(18px, 1.8vw, 24px);
-  letter-spacing: -0.01em;
+.c3__colhead {
   color: var(--muted);
-}
-.c3__tab.is-selected .c3__tab-chip { color: var(--ink); }
-@media (max-width: 860px) {
-  .c3__tabs { flex-direction: row; overflow-x: auto; border-bottom: 1px solid var(--hairline-l); }
-  .c3__tab { border-bottom: 0; border-left: 0; border-top: 3px solid transparent; flex: 1 0 auto; padding: 14px 16px; }
-  .c3__tab.is-selected { border-top-color: var(--accent); }
-  .c3__tab-chip { font-size: 15px; }
+  padding: 14px 0 12px;
+  border-bottom: 1px solid var(--hairline-l);
 }
 
-/* ---- the display: a piece of the hero's night sky ---- */
-.c3__display {
-  position: relative;
-  background:
-    radial-gradient(90% 60% at 50% 108%, color-mix(in srgb, var(--sky-horizon) 26%, transparent), transparent 70%),
-    linear-gradient(0deg, var(--sky-mid) -35%, var(--sky-top) 70%);
-  color: var(--paper-txt);
-  padding: clamp(24px, 3.5vw, 44px);
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: clamp(20px, 3vw, 40px);
-  align-items: center;
-  min-height: 380px;
-}
-@media (max-width: 1100px) { .c3__display { grid-template-columns: 1fr; } }
+.c3__row { padding: 32px 0; border-bottom: 1px solid var(--hairline-l); }
 
-.c3__fork { width: 100%; height: auto; overflow: visible; }
-.c3__fork-conv {
-  stroke: color-mix(in srgb, var(--paper-txt) 40%, transparent);
-  stroke-width: 1;
-  stroke-dasharray: 3 7;
-}
-.c3__fork-core {
-  fill: none;
-  stroke: var(--accent-hot);
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-.c3__fork-glow {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 7;
-  stroke-linecap: round;
-  opacity: 0.45;
-  filter: blur(6px);
-}
-.c3__fork-origin { fill: var(--paper-txt); }
-.c3__fork-tip { fill: var(--accent-hot); }
-.c3__fork-halo { fill: color-mix(in srgb, var(--accent) 30%, transparent); filter: blur(2px); }
-.c3__fork-label {
-  font-family: var(--font-label);
+/* ---- who: the deviation name and its one-line chip ---- */
+.c3__name { color: var(--ink); }
+.c3__chip {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 10px;
   font-size: 11px;
-  letter-spacing: 0.14em;
-  fill: var(--muted);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
 }
-.c3__fork-label--spcx { fill: var(--accent-hot); }
 
 /* ---- the two readings ---- */
-.c3__compare { display: grid; gap: 28px; }
-.c3__side-tag { color: var(--muted); margin-bottom: 8px; }
-.c3__side--spcx .c3__side-tag { color: var(--accent); }
+.c3__side-tag { display: none; color: var(--muted); margin-bottom: 8px; } /* mobile only — desktop has the column head */
 .c3__stat {
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: clamp(34px, 4vw, 56px);
+  font-size: clamp(24px, 2.7vw, 40px);
   letter-spacing: var(--display-tracking);
-  line-height: 1;
+  line-height: 1.05;
   font-variant-numeric: tabular-nums;
 }
-.c3__side--conv .c3__stat { color: color-mix(in srgb, var(--paper-txt) 55%, transparent); }
-.c3__side--spcx .c3__stat { color: var(--accent-hot); text-shadow: var(--glow-amber); }
-.c3__text { font-size: 15px; margin-top: 10px; max-width: 46ch; }
+.c3__side--conv .c3__stat { color: var(--muted); }
+.c3__side--spcx .c3__stat { color: var(--accent); }
+.c3__text { font-size: 14px; margin-top: 10px; max-width: 44ch; line-height: 1.55; }
 .c3__side--conv .c3__text { color: var(--muted); }
-.c3__side--spcx .c3__text { color: var(--paper-txt); opacity: 0.9; }
+.c3__side--spcx .c3__text { color: var(--ink); }
 .c3__note {
-  margin-top: 14px;
+  margin-top: 12px;
   color: var(--muted);
   text-transform: none;
   letter-spacing: 0.06em;
+  font-size: 11px;
+}
+
+/* ---- the mini-fork: convention runs straight and dashed, the SpaceX
+   track bends away in dawn amber ---- */
+.c3__forkcell { padding-top: 4px; }
+.c3__fork { width: 100%; height: auto; overflow: visible; }
+.c3__fork-conv {
+  stroke: color-mix(in srgb, var(--ink) 32%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 3 6;
+}
+.c3__fork-core {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.c3__fork-origin { fill: color-mix(in srgb, var(--ink) 45%, transparent); }
+.c3__fork-tip { fill: var(--accent); }
+
+/* ---- stacked rows below tablet width ---- */
+@media (max-width: 860px) {
+  .c3__colhead { display: none; }
+  .c3__row { grid-template-columns: 1fr; gap: 18px; padding: 26px 0; }
+  .c3__side-tag { display: block; }
+  .c3__forkcell { max-width: 170px; padding-top: 0; }
 }
 
 /* ---- the deal timeline: a dotted amber strip ---- */

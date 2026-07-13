@@ -1,21 +1,20 @@
 /* ============================================================
-   C7 · THE VERDICT (dark) — the ascent map.
-   The hero's world, revisited to carry the argument. The limb of
-   Earth curves along the bottom of a full-width scene — dark
-   body, razor amber rim, atmosphere glow — under the lumen star
-   field. Dashed altitude bands arc above it: LOW ORBIT, DECAYING,
-   STABLE ORBIT, ESCAPE VELOCITY. Each of the six constituencies
-   flies its verdict as a rocket:
-     company    — cruises the stable-orbit band, steady
-     holders    — enters high but sinks across every pass
-     day-one    — launches, arcs over, falls back; forever
-     banks      — barely clears the surface, low and fast
-     retail     — swings eccentrically through every band
-     structure  — launches clean through the top of the frame
-   Altitude IS the outcome. Tap a rocket, its trajectory, its
-   label, or a legend chip: the flight brightens, the rest dim,
-   and the readout shows the verdict + evidence (from the hidden
-   #c7-ledger, figures via data-fact). Then the thesis viewport:
+   C7 · THE VERDICT (dark) — the orbit map.
+   Earth sits at the centre of one screen, dashed altitude rings
+   around it: LOW ORBIT, DECAYING, STABLE ORBIT, ESCAPE VELOCITY.
+   The Moon hangs in the top-right corner. Each of the six
+   constituencies flies its verdict as one slow orbit:
+     company    — a clean circle on the stable ring
+     holders    — a spiral that sits lower on every pass
+     day-one    — suborbital: up, over, and back down; forever
+     banks      — a tight, fast circle just above the surface
+     retail     — an eccentric ellipse swinging across the rings
+     structure  — the showpiece: out to the Moon and back
+   Altitude IS the outcome. Beside the map, a readout card and
+   the six legend chips — the whole verdict on one screen. Tap a
+   flight or a chip: it brightens, the rest dim, the readout
+   shows the verdict + evidence (from the hidden #c7-ledger,
+   figures via data-fact). Then the thesis viewport:
    "Priced efficiently. Traded emotionally."
    ============================================================ */
 import { gsap, ScrollTrigger, reducedMotion } from '../lib/motion.js';
@@ -24,55 +23,84 @@ import { maskReveal } from '../lib/reveal.js';
 import { svgEl } from '../lib/chart.js';
 import { mountSky } from '../lib/lumen.js';
 
-const W = 1200, H = 700;
-const CX = 600, CY = 2100, R = 1500;      // Earth: centre far below, crest at y=600
-const TRAIL = 110;                        // bright exhaust behind each spark, in px
+const W = 1000, H = 640;
+const EARTH = { x: 430, y: 320, r: 78 };
+const MOON = { x: 880, y: 104, r: 20 };
+const TRAIL = 80; // bright exhaust behind each spark, in px
 
-/* polar helper: angle φ from the crest (radians, east positive), altitude
-   above the surface -> scene coordinates */
-const pt = (phi, alt) => {
-  const r = R + alt;
-  return [CX + r * Math.sin(phi), CY - r * Math.cos(phi)];
+const RINGS = [
+  { r: 270, name: 'ESCAPE VELOCITY' },
+  { r: 215, name: 'STABLE ORBIT' },
+  { r: 165, name: 'DECAYING ORBIT' },
+  { r: 120, name: 'LOW ORBIT' },
+];
+
+/* an ellipse around a centre, optionally rotated — returns [x, y] for
+   s ∈ [0,1]. Pass cx/cy off Earth to put Earth at a focus. */
+const orbit = ({ rx, ry = rx, rot = 0, cx = EARTH.x, cy = EARTH.y, phase = 0 }) => {
+  const cosR = Math.cos(rot), sinR = Math.sin(rot);
+  return (s) => {
+    const t = 2 * Math.PI * (s + phase);
+    const ex = rx * Math.cos(t), ey = ry * Math.sin(t);
+    return [cx + ex * cosR - ey * sinR, cy + ex * sinR + ey * cosR];
+  };
 };
-const edgePhi = (alt) => Math.asin((CX + 40) / (R + alt)); // just past the frame edge
 
-/* Flight shapes: each returns [φ, alt] for s ∈ [0,1]; the path is sampled
-   from it and sparks fly the path at constant speed. `dead` is the silent
-   fraction of the cycle after the flight (relaunch pause); `label` the
-   s-position where the name tag sits. */
+/* retail's ellipse: Earth at a focus — perigee 140, apogee 252 */
+const RETAIL_A = 196, RETAIL_C = 56, RETAIL_ROT = -0.45;
+const retailOrbit = orbit({
+  rx: RETAIL_A,
+  ry: Math.sqrt(RETAIL_A ** 2 - RETAIL_C ** 2),
+  rot: RETAIL_ROT,
+  cx: EARTH.x - RETAIL_C * Math.cos(RETAIL_ROT),
+  cy: EARTH.y - RETAIL_C * Math.sin(RETAIL_ROT),
+});
+
+/* Flight shapes: each is [x, y] for s ∈ [0,1] — or a hand-authored path
+   `d` for the one flight that leaves the map's orbital grammar. `dead` is
+   the silent fraction of the cycle after the flight (relaunch pause);
+   `labelAt` the s-position where the name tag sits. */
 const FLIGHTS = {
   stable: {
-    period: 15, dead: 0, labelAt: 0.80,
-    shape: (s) => [(-1 + 2 * s) * edgePhi(330), 330],
+    period: 26, dead: 0, labelAt: 0.13,
+    shape: orbit({ rx: 215, phase: 0.62 }),
   },
   decay: {
-    period: 12, dead: 0, labelAt: 0.26,
-    shape: (s) => [(-1 + 2 * s) * edgePhi(240), 245 - 85 * s],
+    // two passes, each sitting lower: stable-adjacent down into the decay band
+    period: 30, dead: 0.08, labelAt: 0.30,
+    shape: (s) => {
+      const t = 4 * Math.PI * s - Math.PI / 2;
+      const r = 222 - 62 * s;
+      return [EARTH.x + r * Math.cos(t), EARTH.y + r * Math.sin(t)];
+    },
   },
   fall: {
-    period: 9, dead: 0.18, labelAt: 0.42,
-    shape: (s) => [-0.10 + 0.26 * s, 258 * Math.sin(Math.PI * s)],
+    // suborbital: off the surface, over the top, back down — never an orbit
+    period: 16, dead: 0.22, labelAt: 0.50,
+    shape: (s) => {
+      const a = -Math.PI + 0.55 + (Math.PI - 1.1) * s;
+      const r = EARTH.r + 2 + 105 * Math.sin(Math.PI * s);
+      return [EARTH.x + r * Math.cos(a), EARTH.y + r * Math.sin(a)];
+    },
   },
   tiny: {
-    period: 8, dead: 0, labelAt: 0.30,
-    shape: (s) => [(-1 + 2 * s) * edgePhi(90), 90],
+    period: 11, dead: 0, labelAt: 0.86,
+    shape: orbit({ rx: 104, phase: 0.30 }),
   },
   eccentric: {
-    period: 13, dead: 0, labelAt: 0.63,
-    shape: (s) => [(-1 + 2 * s) * edgePhi(240), 215 + 125 * Math.sin(2 * Math.PI * 1.35 * s + 1.15)],
+    period: 24, dead: 0, labelAt: 0.55,
+    shape: retailOrbit,
   },
-  escape: {
-    period: 11, dead: 0.22, labelAt: 0.60,
-    shape: (s) => [-0.24 + 0.44 * Math.pow(s, 1.3), 640 * Math.pow(s, 1.7)],
+  moon: {
+    // the figure-eight, exactly: a crossed belt around the two bodies.
+    // 213° of low Earth orbit (r 110), a straight transfer leg out, 213°
+    // round the far side of the Moon (r 34), and the return leg — the two
+    // legs are the circles' internal tangents, so they cross between the
+    // bodies and every joint is tangency-smooth. One closed loop.
+    period: 42, dead: 0, labelAt: 0.15,
+    d: 'M 413.0 211.3 L 885.2 137.6 A 34 34 0 1 0 857.1 78.9 L 504.2 401.2 A 110 110 0 1 1 413.0 211.3 Z',
   },
 };
-
-const BANDS = [
-  { alt: 460, name: 'ESCAPE VELOCITY' },
-  { alt: 330, name: 'STABLE ORBIT' },
-  { alt: 210, name: 'DECAYING ORBIT' },
-  { alt: 90,  name: 'LOW ORBIT' },
-];
 
 export function initChapter() {
   const c7 = document.querySelector('#c7');
@@ -97,8 +125,8 @@ export function initChapter() {
       'aria-label': `${li.dataset.name}: ${li.dataset.verdict}`,
     });
 
-    // the full trajectory, sampled from the flight shape
-    const d = pathFromShape(spec.shape);
+    // the full flight, sampled from the shape (or hand-authored for the Moon)
+    const d = spec.d ?? pathFromShape(spec.shape);
     const trace = svgEl('path', { class: 'rocket-trace', d });
     const hit = svgEl('path', { class: 'rocket-hit', d });
     const live = svgEl('g', { class: 'rocket-live' });
@@ -106,22 +134,22 @@ export function initChapter() {
     const halo = svgEl('circle', { class: 'rocket-halo', r: 10 });
     const spark = svgEl('circle', { class: 'rocket-spark', r: 4 });
     live.append(trail, halo, spark);
-
-    const [lx, ly] = pt(...spec.shape(spec.labelAt));
-    const label = svgEl('text', {
-      class: 'rocket-label', x: lx + 14, y: ly - 14,
-      'text-anchor': lx > W - 260 ? 'end' : 'start',
-    });
-    label.textContent = li.dataset.name;
-
-    group.append(trace, hit, live, label);
+    group.append(trace, hit, live);
     svg.appendChild(group);
 
     const len = trace.getTotalLength();
+    const lp = trace.getPointAtLength(spec.labelAt * len);
+    const label = svgEl('text', {
+      class: 'rocket-label', x: lp.x + 12, y: lp.y - 12,
+      'text-anchor': lp.x > W - 230 ? 'end' : 'start',
+    });
+    label.textContent = li.dataset.name;
+    group.appendChild(label);
+
     trail.style.strokeDasharray = `${TRAIL} ${len + TRAIL}`;
     trail.style.strokeDashoffset = TRAIL; // nothing painted until the loop runs
 
-    return { li, spec, group, trace, trail, spark, halo, live, len, phase: i * 2.7 };
+    return { li, spec, group, trace, trail, spark, halo, live, len, phase: i * 3.1 };
   });
 
   /* ---- selection: rocket, trajectory, label or legend chip ---- */
@@ -152,17 +180,23 @@ export function initChapter() {
     rocket.group.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(rocket); }
     });
+  }
 
+  // The manifest reads top-down like the map does: highest flight first
+  const ALTITUDE = { moon: 0, stable: 1, decay: 2, eccentric: 3, tiny: 4, fall: 5 };
+  const ranked = [...rockets].sort((a, b) => ALTITUDE[a.li.dataset.orbit] - ALTITUDE[b.li.dataset.orbit]);
+  ranked.forEach((rocket, i) => {
     const chip = document.createElement('button');
-    chip.className = 'mono';
+    chip.className = 'mono c7__flight';
     chip.type = 'button';
     chip.innerHTML =
-      `<span>${rocket.li.dataset.name}</span>` +
+      `<span class="chip__idx">0${i + 1}</span>` +
+      `<span class="chip__name">${rocket.li.dataset.name}</span>` +
       `<span class="chip__badge chip__badge--${rocket.li.dataset.tone}">${rocket.li.dataset.badge}</span>`;
     chip.addEventListener('click', () => choose(rocket));
     legend.appendChild(chip);
     rocket.chip = chip;
-  }
+  });
 
   /* ---- flight: place a rocket at cycle position u ∈ [0,1) ---- */
   function place(rocket, u) {
@@ -185,13 +219,15 @@ export function initChapter() {
   }
 
   if (reducedMotion) {
-    // a still of the map: every rocket parked at its label position
+    // a still of the map: every rocket parked at its label position,
+    // every name shown
+    svg.classList.add('is-static');
     for (const rocket of rockets) place(rocket, rocket.spec.labelAt * (1 - rocket.spec.dead));
     select(rockets[0]);
     return;
   }
 
-  // Traces draw themselves in as the map arrives — the six trajectories
+  // Traces draw themselves in as the map arrives — the six orbits
   // etched before the sparks fly them
   gsap.from(rockets.map((r) => r.trace), {
     strokeDashoffset: (i, el) => el.getTotalLength(),
@@ -227,35 +263,44 @@ export function initChapter() {
 }
 
 /* sample a flight shape into an SVG path */
-function pathFromShape(shape, steps = 130) {
+function pathFromShape(shape, steps = 160) {
   let d = '';
   for (let i = 0; i <= steps; i++) {
-    const [x, y] = pt(...shape(i / steps));
+    const [x, y] = shape(i / steps);
     d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
   }
   return d;
 }
 
-/* the static scenery: Earth's limb with its atmosphere shell, and the
-   dashed altitude bands with their names — the map's y-axis */
+/* the static scenery: Earth at the centre with its atmosphere shell, the
+   dashed altitude rings with their names, and the Moon in the corner */
 function buildScene(svg) {
-  const limb = (cls, width) => svgEl('circle', { class: cls, cx: CX, cy: CY, r: R, 'stroke-width': width });
-  svg.appendChild(limb('c7-atmo c7-atmo--plum', 150));
-  svg.appendChild(limb('c7-atmo c7-atmo--amber', 44));
-  svg.appendChild(svgEl('circle', { class: 'c7-earth', cx: CX, cy: CY, r: R }));
-  svg.appendChild(limb('c7-rim', 2.5));
+  const earth = (cls, width) => svgEl('circle', {
+    class: cls, cx: EARTH.x, cy: EARTH.y, r: EARTH.r, 'stroke-width': width,
+  });
+  svg.appendChild(earth('c7-atmo c7-atmo--plum', 70));
+  svg.appendChild(earth('c7-atmo c7-atmo--amber', 24));
+  svg.appendChild(svgEl('circle', { class: 'c7-earth', cx: EARTH.x, cy: EARTH.y, r: EARTH.r }));
+  svg.appendChild(earth('c7-rim', 2));
 
-  for (const band of BANDS) {
-    svg.appendChild(svgEl('circle', {
-      class: 'c7-band', cx: CX, cy: CY, r: R + band.alt,
-    }));
-    // label where the band meets the left edge, tucked above the arc
-    const y = CY - Math.sqrt((R + band.alt) ** 2 - (CX - 30) ** 2);
-    const label = svgEl('text', { class: 'c7-band-label', x: 30, y: y - 10 });
-    label.textContent = band.name;
+  // ring names ladder up the north-west diagonal, clear of the Moon
+  const NW = -3 * Math.PI / 4;
+  for (const ring of RINGS) {
+    svg.appendChild(svgEl('circle', { class: 'c7-band', cx: EARTH.x, cy: EARTH.y, r: ring.r }));
+    const label = svgEl('text', {
+      class: 'c7-band-label', 'text-anchor': 'end',
+      x: EARTH.x + ring.r * Math.cos(NW) - 6,
+      y: EARTH.y + ring.r * Math.sin(NW) - 6,
+    });
+    label.textContent = ring.name;
     svg.appendChild(label);
   }
-  const surface = svgEl('text', { class: 'c7-band-label', x: 30, y: 682 });
-  surface.textContent = 'THE SURFACE';
-  svg.appendChild(surface);
+
+  svg.appendChild(svgEl('circle', { class: 'c7-moon', cx: MOON.x, cy: MOON.y, r: MOON.r }));
+  // label clear of the free-return swing that wraps the Moon
+  const moonLabel = svgEl('text', {
+    class: 'c7-band-label', 'text-anchor': 'middle', x: MOON.x + 58, y: MOON.y - 36,
+  });
+  moonLabel.textContent = 'THE MOON';
+  svg.appendChild(moonLabel);
 }

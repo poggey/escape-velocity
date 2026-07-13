@@ -143,30 +143,18 @@
       <div class="container">
         <p class="mono label">03 / BREAKING THE PLAYBOOK<span class="label__stage">THE FLIGHT PLAN</span></p>
         <h2>Five deviations</h2>
-        <p class="lede">SpaceX didn't run an IPO; it dictated one. Five dials on the deal, each set far outside convention. Select a deviation — or let the board run.</p>
+        <p class="lede">SpaceX didn't run an IPO; it dictated one. Five dials on the deal, each set far outside convention — read them side by side.</p>
 
-        <!-- The deviation board (c3-playbook.js): five tabs on the left, and a
-             dark instrument display where the convention track runs straight
-             and the SpaceX track burns away from it. Content lives in the
-             hidden ledger below; figures via data-fact as everywhere. -->
+        <!-- The divergence board (c3-playbook.js): all five deviations at
+             once, one ruled row each — the convention reading, a mini-fork
+             showing how hard the track bends away (data-diverge), then what
+             SpaceX did. Content lives in the hidden ledger below; figures
+             via data-fact as everywhere. -->
         <div class="c3__board" id="c3-board">
-          <div class="c3__tabs" role="tablist" aria-label="The five deviations" id="c3-tabs"></div>
-          <div class="c3__display">
-            <svg class="c3__fork" id="c3-fork" viewBox="0 0 560 236" aria-hidden="true"></svg>
-            <div class="c3__compare">
-              <div class="c3__side c3__side--conv">
-                <p class="mono c3__side-tag">CONVENTION</p>
-                <p class="c3__stat" id="c3-conv-stat"></p>
-                <p class="c3__text" id="c3-conv-text"></p>
-              </div>
-              <div class="c3__side c3__side--spcx">
-                <p class="mono c3__side-tag">SPACEX</p>
-                <p class="c3__stat" id="c3-spcx-stat"></p>
-                <p class="c3__text" id="c3-spcx-text"></p>
-                <p class="mono c3__note" id="c3-note"></p>
-              </div>
-            </div>
+          <div class="c3__colhead mono" aria-hidden="true">
+            <span>DEVIATION</span><span>CONVENTION</span><span></span><span>SPACEX</span>
           </div>
+          <!-- rows appended by c3-playbook.js from the ledger -->
         </div>
 
         <!-- The ledger: single source for the board. data-diverge sets how
@@ -345,21 +333,25 @@
          the six outcomes — altitude IS the verdict. Built by c7-verdict.js;
          the lumen sky mounts behind it. -->
     <section class="chapter chapter--dark c7" id="c7" data-chapter="07 / THE VERDICT">
-      <div class="container">
-        <p class="mono label">07 / THE VERDICT<span class="label__stage">ORBIT CHECK</span></p>
-        <h2>Who reached<br />escape velocity?</h2>
-        <p class="lede">An IPO is a launch: everyone aboard wants enough speed to stay up. A month on, here are the six parties to the deal, each flown as a flight path — the higher the flight, the better the outcome.</p>
-        <p class="mono c7__key">READ IT LIKE AN ALTIMETER · HIGHER IS BETTER · SELECT ANY FLIGHT FOR THE EVIDENCE</p>
-      </div>
+      <!-- One screen: slim header, then the orbit map beside the readout +
+           legend rail — the whole verdict visible at once on desktop. -->
+      <div class="container c7__stage">
+        <header class="c7__head">
+          <p class="mono label">07 / THE VERDICT<span class="label__stage">ORBIT CHECK</span></p>
+          <h2 class="c7__title">Who reached escape velocity?</h2>
+          <p class="mono c7__key">SIX PARTIES · ONE ORBIT EACH · HIGHER IS BETTER · SELECT A FLIGHT FOR THE EVIDENCE</p>
+        </header>
 
-      <div class="c7__map">
-        <svg id="c7-orbit" viewBox="0 0 1200 700" role="img"
-          aria-label="The six constituencies of the deal flown as rockets above the limb of Earth: the company holds a high stable orbit, IPO holders' orbit decays, day-one buyers arc up and fall back, the banks barely clear the surface, retail swings between bands, and market structure escapes off the top"></svg>
-        <div class="c7__readout" id="c7-readout" aria-live="polite"></div>
-      </div>
+        <div class="c7__map">
+          <svg id="c7-orbit" viewBox="0 0 1000 640" role="img"
+            aria-label="The six parties to the deal in orbit around Earth: the company holds a stable orbit, IPO holders' orbit decays, day-one buyers arc up and fall back, the banks hug a low orbit, retail swings an eccentric ellipse, and market structure flies out to the Moon and back"></svg>
+        </div>
 
-      <div class="container">
-        <div class="c7__legend" id="c7-legend"><!-- one button per constituency, built by c7-verdict.js --></div>
+        <aside class="c7__rail">
+          <div class="c7__readout" id="c7-readout" aria-live="polite"></div>
+          <p class="mono c7__manifest-kicker">FLIGHT MANIFEST · HIGHEST FIRST</p>
+          <div class="c7__legend" id="c7-legend"><!-- one row per constituency, built by c7-verdict.js --></div>
+        </aside>
 
         <!-- The ledger data: one line per constituency, figures via data-fact.
              Hidden here; c7-verdict.js flies each and lifts it into the
@@ -370,7 +362,7 @@
           <li data-sat="dayone" data-name="DAY-ONE BUYERS" data-verdict="UNDERWATER" data-badge="UNDERWATER" data-orbit="fall" data-tone="loss"><span data-role="desc">Anyone who paid the market price after the open — <span data-fact="day_one.open" data-format="usd0"></span> and up.</span><span data-role="evidence">Bought $150–$225; price ~<span data-fact="aftermath.price_jul8" data-format="usd0"></span>. Never reached a stable orbit.</span></li>
           <li data-sat="banks" data-name="THE BANKS" data-verdict="PYRRHIC" data-badge="PYRRHIC" data-orbit="tiny" data-tone="paper"><span data-role="desc">The <span data-fact="ipo.banks"></span> underwriters — paid in prestige, not fees.</span><span data-role="evidence">~<span data-fact="ipo.fees_bn" data-format="bn1"></span> in fees on the record deal; the fee model and allocation power publicly broken. In orbit, barely.</span></li>
           <li data-sat="retail" data-name="RETAIL" data-verdict="INCLUDED — AND EXPOSED" data-badge="EXPOSED" data-orbit="eccentric" data-tone="paper"><span data-role="desc">The <span data-fact="ipo.retail_pct"></span>% of the deal sold through brokerage apps.</span><span data-role="evidence"><span data-fact="ipo.retail_pct"></span>% allocation was real democratisation — of a <span data-fact="valuation.ev_ebitda_multiple"></span>×-EBITDA risk. A wide, swinging orbit.</span></li>
-          <li data-sat="structure" data-name="MARKET STRUCTURE" data-verdict="PRECEDENT SET" data-badge="ESCAPED" data-orbit="escape" data-tone="paper"><span data-role="desc">Not a buyer at all: the IPO playbook itself, and what this deal did to it.</span><span data-role="evidence">Fixed pricing, sub-1% fees, engineered index inclusion — a trajectory out of the old system entirely; others may now follow it.</span></li>
+          <li data-sat="structure" data-name="MARKET STRUCTURE" data-verdict="PRECEDENT SET" data-badge="ESCAPED" data-orbit="moon" data-tone="paper"><span data-role="desc">Not a buyer at all: the IPO playbook itself, and what this deal did to it.</span><span data-role="evidence">Fixed pricing, sub-1% fees, engineered index inclusion — a trajectory out of the old system entirely; others may now follow it.</span></li>
         </ul>
       </div>
       <div class="container c7__thesis">
@@ -430,13 +422,6 @@
           <h3>What I would pay</h3>
           <p>At the last close the market is implying a value of about <span id="c75-p-ev"></span> on the offering share base. Hold that price, assume the multiple normalises to 25× EBITDA by 2030, and the business needs roughly <span id="c75-p-ebitda"></span> of EBITDA by then: a compound growth rate of about <span id="c75-p-cagr"></span> a year for five years from 2025's <span data-fact="valuation.ebitda_2025_bn" data-format="bn1"></span>. I will not underwrite that on promises. I would underwrite something closer to 50 to 55% a year, which is still hyper-growth, and still assumes Starlink keeps compounding and some of the AI story lands. At the same 25× exit that puts my range at roughly <span id="c75-p-low"></span> to <span id="c75-p-high"></span> a share. The <span data-fact="ipo.price" data-format="usd0"></span> offer sat just above it, close enough to call efficient; the aftermarket did not. So I am not a buyer at today's price, I would be interested near the top of my range, and if the lockup waves push it below the bottom I would expect to be buying volatility rather than chasing it. If data centres in space stall, all of this is too high, and I accept that being on the record means being wrong in public.</p>
         </article>
-
-        <!-- The Watch (§0.5-R2): dated predictions, immutable once made -->
-        <div class="watch">
-          <h3>The Watch</h3>
-          <p class="lede">The deal is unfinished. Each upcoming event, my expectation date-stamped before it happens — left on the record afterwards, right or wrong.</p>
-          <div id="c75-watch"><!-- rendered from data/watch.json --></div>
-        </div>
       </div>
     </section>
 
@@ -471,5 +456,9 @@
 
   </main>
   <script type="module" src="/src/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/poggey/built-by@main/built-by.js"
+          data-name="Padraig Middleton"
+          data-github="https://github.com/poggey"
+          defer></script>
 </body>
 </html>

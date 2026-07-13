@@ -62,8 +62,8 @@ initInterludes();
 
 buildProgressMeter();
 
-// Everything above may have changed section heights (charts, watch items,
-// placeholders) — re-measure all trigger positions once at the end
+// Everything above may have changed section heights (charts, rendered
+// registers, placeholders) — re-measure all trigger positions once at the end
 ScrollTrigger.refresh();
 
 // dev-only: ?at=c3 brings a section into the viewport AFTER layout settles —

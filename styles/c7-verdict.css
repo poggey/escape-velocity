@@ -1,22 +1,33 @@
-/* C7 · THE VERDICT — the ascent map: the hero's limb-of-Earth world as a
-   full-width instrument. Altitude bands, six flown trajectories, a glass
-   readout. Then the thesis line. The lumen sky mounts behind everything. */
+/* C7 · THE VERDICT — the orbit map, composed to one screen: slim header,
+   Earth-centred map beside the glass readout + legend rail. Then the
+   thesis line. The lumen sky mounts behind everything. */
 
-.c7 { overflow: hidden; }
+.c7 { overflow: hidden; padding: 0; }
 
-/* the how-to-read line under the lede */
-.c7__key { color: var(--muted); margin-top: 18px; }
-
-/* ---- the map: full-bleed, tall ---- */
-.c7__map {
-  position: relative;
-  z-index: 1;
-  margin-top: clamp(32px, 5vh, 64px);
+/* ---- the one-screen stage: header across the top, then map | rail.
+   Wider than the site column — the map is the show-off piece ---- */
+.c7__stage {
+  min-height: 100svh;
+  max-width: min(1560px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(300px, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  column-gap: clamp(24px, 3vw, 56px);
+  align-items: center;
+  padding-top: clamp(24px, 4vh, 48px);
+  padding-bottom: clamp(24px, 4vh, 48px);
 }
+.c7__head { grid-column: 1 / -1; align-self: start; }
+.c7__title { font-size: clamp(30px, 3.4vw, 52px); margin-top: 20px; }
+.c7__key { color: var(--muted); margin-top: 14px; }
+
+.c7__map { position: relative; z-index: 1; min-width: 0; }
 .c7 #c7-orbit {
   display: block;
   width: 100%;
   height: auto;
+  max-height: calc(100svh - 200px);
+  overflow: visible;
 }
 
 /* ---- scenery ---- */
@@ -28,8 +39,14 @@
   filter: drop-shadow(0 0 6px var(--accent));
 }
 .c7-atmo { fill: none; }
-.c7-atmo--plum { stroke: var(--sky-mid); opacity: 0.55; filter: blur(28px); }
-.c7-atmo--amber { stroke: var(--accent); opacity: 0.5; filter: blur(14px); }
+.c7-atmo--plum { stroke: var(--sky-mid); opacity: 0.55; filter: blur(22px); }
+.c7-atmo--amber { stroke: var(--accent); opacity: 0.5; filter: blur(12px); }
+.c7-moon {
+  fill: color-mix(in srgb, var(--starlight) 55%, var(--black));
+  stroke: var(--starlight);
+  stroke-width: 1;
+  opacity: 0.9;
+}
 
 .c7-band {
   fill: none;
@@ -48,12 +65,12 @@
 
 /* ---- the rockets ---- */
 .rocket { cursor: pointer; outline: none; transition: opacity 0.35s var(--ease-out); }
-.rocket.is-dim { opacity: 0.30; }
+.rocket.is-dim { opacity: 0.2; }
 .rocket:focus-visible .rocket-trace { stroke: var(--muted); }
 
 .rocket-trace {
   fill: none;
-  stroke: color-mix(in srgb, var(--paper-txt) 26%, transparent);
+  stroke: color-mix(in srgb, var(--paper-txt) 20%, transparent);
   stroke-width: 1;
 }
 .rocket.is-selected .rocket-trace {
@@ -85,21 +102,31 @@
 .rocket.is-selected .rocket-spark { r: 6; }
 .rocket.is-selected .rocket-halo { r: 15; }
 
-.rocket-label { fill: var(--paper-txt); opacity: 0.6; transition: opacity 0.3s var(--ease-out); }
+/* names appear only where the reader is looking — the selected flight
+   (or hover); the reduced-motion still shows them all */
+.rocket-label { fill: var(--paper-txt); opacity: 0; transition: opacity 0.3s var(--ease-out); }
 .rocket:hover .rocket-label,
-.rocket.is-selected .rocket-label { opacity: 1; fill: var(--accent-hot); }
+.rocket.is-selected .rocket-label,
+.is-static .rocket-label { opacity: 1; }
+.rocket:hover .rocket-label,
+.rocket.is-selected .rocket-label { fill: var(--accent-hot); }
 
-/* ---- the readout: a glass card floating over the sky ---- */
-.c7__readout {
-  position: absolute;
-  top: 0;
-  right: var(--gutter);
-  width: min(360px, 34vw);
+/* ---- the rail: ONE glass instrument panel — the verdict readout over
+   the flight manifest, ruled like a telemetry sheet, not stacked boxes ---- */
+.c7__rail {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  align-self: center;
   border: 1px solid var(--hairline-d);
   background: color-mix(in srgb, var(--black) 55%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 26px;
+  padding: 26px 26px 12px;
+}
+.c7__readout {
+  padding-bottom: 22px;
+  min-height: 224px; /* the auto-cycle must not reflow the rail */
 }
 .readout__name { color: var(--muted); margin-bottom: 10px; }
 .readout__verdict {
@@ -114,49 +141,72 @@
 .readout__desc { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
 .readout__evidence { color: var(--paper-txt); opacity: 0.85; font-size: 15px; }
 
-@media (max-width: 860px) {
-  .c7__readout {
-    position: static;
-    width: auto;
-    min-height: 170px; /* the auto-cycle must not reflow the page */
-    margin: 20px var(--gutter) 0;
-    background: color-mix(in srgb, var(--panel) 80%, transparent);
-  }
-}
-
-/* legend chips double as the accessible way in on touch */
-.c7__legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
-.c7__legend button {
-  background: none;
-  border: 1px solid var(--hairline-d);
+/* the flight manifest: numbered rows under an amber keyline, hairline-ruled
+   like a telemetry sheet. The six outcomes scan with no clicks, and each
+   row is the accessible way in on touch. */
+.c7__manifest-kicker {
   color: var(--muted);
-  padding: 8px 14px;
+  font-size: 10px;
+  padding: 14px 0 10px;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.c7__flight {
+  display: grid;
+  grid-template-columns: 26px 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+  position: relative;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--hairline-d);
+  color: var(--muted);
+  padding: 11px 2px;
   cursor: pointer;
-  transition: color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  text-align: left;
+  transition: color 0.25s var(--ease-out);
 }
-.c7__legend button:hover,
-.c7__legend button.is-selected {
-  color: var(--accent-hot);
-  border-color: var(--accent);
-  box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 25%, transparent);
+.c7__legend .c7__flight:first-child { border-top: 0; }
+.c7__flight:hover .chip__name { color: var(--paper-txt); }
+/* the selected flight: an amber tab against the panel edge, name lit */
+.c7__flight.is-selected::before {
+  content: '';
+  position: absolute;
+  left: -26px; /* flush with the panel border, through its padding */
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent);
 }
-/* the verdict rides on every chip — the six outcomes scan with no clicks */
+.c7__flight.is-selected .chip__idx { color: var(--accent); }
+.c7__flight.is-selected .chip__name { color: var(--accent-hot); }
+.chip__idx { font-size: 10px; color: color-mix(in srgb, var(--muted) 70%, transparent); }
+.chip__name { transition: color 0.25s var(--ease-out); }
 .chip__badge {
-  display: block;
-  margin-top: 4px;
   font-size: 11px;
   letter-spacing: 0.12em;
   color: var(--accent-hot);
   opacity: 0.9;
+  white-space: nowrap;
 }
 .chip__badge--gain { color: var(--gain); }
 .chip__badge--loss { color: var(--loss); }
 
-/* SVG text scales with the 1200-unit viewBox: at phone width the 12px
-   labels render ~4px. Set them in viewBox units the frame can afford. */
+/* ---- below tablet width the one-screen promise relaxes: header, map,
+   readout and chips stack and scroll normally ---- */
+@media (max-width: 860px) {
+  .c7__stage { grid-template-columns: 1fr; row-gap: 20px; min-height: 0; }
+  .c7__head, .c7__map, .c7__rail { grid-column: 1; }
+  .c7 #c7-orbit { max-height: none; }
+  .c7__readout { min-height: 190px; }
+}
+
+/* SVG text scales with the 1000-unit viewBox: at phone width the 12px
+   labels render tiny. Set them in viewBox units the frame can afford. */
 @media (max-width: 700px) {
   .c7-band-label,
-  .rocket-label { font-size: 26px; letter-spacing: 0.08em; }
+  .rocket-label { font-size: 24px; letter-spacing: 0.08em; }
   .rocket-hit { stroke-width: 60; }
 }
 

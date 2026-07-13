@@ -26,7 +26,7 @@ export function initChapter() {
   const discrepancies = c8.querySelector('#c8-discrepancies');
   for (const d of sources.discrepancies) {
     const item = document.createElement('div');
-    item.className = 'watch-item';
+    item.className = 'register-item';
     item.innerHTML =
       `<p class="mono">${d.topic}</p>` +
       `<div><p>${d.versions}</p><p class="mono">${d.treatment}</p></div>`;

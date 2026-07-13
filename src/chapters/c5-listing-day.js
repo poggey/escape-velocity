@@ -130,7 +130,7 @@ export function initChapter() {
   gsap.to(proxy, {
     p: 1,
     ease: 'none',
-    scrollTrigger: { trigger: c5, start: 'top top', end: '+=150%', pin: true, scrub: 1 },
+    scrollTrigger: { trigger: c5, start: 'top top', end: '+=150%', pin: true, scrub: 1, anticipatePin: 1 },
     onUpdate: () => {
       line.style.strokeDashoffset = length * (1 - proxy.p);
       const pt = line.getPointAtLength(length * proxy.p);
