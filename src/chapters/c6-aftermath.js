@@ -49,8 +49,16 @@ function buildPriceChart(c6) {
   const x = makeScale([0, rows.length - 1], [PLOT.x0, PLOT.x1]);
   const y = makeScale([135, 235], [PLOT.y1, PLOT.y0]); // inverted: SVG y grows downward
 
+  const points = rows.map((r, i) => [x(i), y(r.close)]);
+  const last = rows.length - 1;
+  const peakIndex = rows.findIndex((r) => r.close === Math.max(...rows.map((q) => q.close)));
+  // '2026-06-16' -> '16 JUN', so the labels follow whatever window the notebook wrote
+  const day = (iso) => new Date(iso + 'T00:00:00Z')
+    .toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' }).toUpperCase();
+
   const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, class: 'chart', role: 'img',
-    'aria-label': 'SPCX daily close since listing: run to $225.64, correction to about $150' });
+    'aria-label': `SPCX daily close since listing: run to a ${fmt.usd2(rows[peakIndex].close)} closing peak, ` +
+      `then down to ${fmt.usd2(rows[last].close)} by ${day(rows[last].date)}` });
   const text = (tx, ty, str, anchor = 'start', cls = '') => svg.appendChild(Object.assign(
     svgEl('text', { x: tx, y: ty, 'text-anchor': anchor, class: cls }), { textContent: str }));
 
@@ -59,10 +67,6 @@ function buildPriceChart(c6) {
     svg.appendChild(svgEl('line', { class: 'grid', x1: PLOT.x0, y1: y(price), x2: PLOT.x1, y2: y(price) }));
     text(PLOT.x0 - 12, y(price) + 4, '$' + price, 'end');
   }
-
-  const points = rows.map((r, i) => [x(i), y(r.close)]);
-  const last = rows.length - 1;
-  const peakIndex = rows.findIndex((r) => r.close === Math.max(...rows.map((q) => q.close)));
 
   // soft ink area under the whole series (SVG gradient, tokens via CSS vars)
   const defs = svgEl('defs', {});
@@ -78,8 +82,8 @@ function buildPriceChart(c6) {
   // with its figure printed inside the shape — the chart's one loud mark
   const ddPoints = points.slice(peakIndex).concat([[points[last][0], PLOT.y1], [points[peakIndex][0], PLOT.y1]]);
   svg.appendChild(svgEl('path', { class: 'drawdown-area', d: pathFrom(ddPoints) + ' Z' }));
-  text(x(peakIndex + (last - peakIndex) / 2), y(163),
-    `${fmt.pct0(drawdown.reported_drawdown_pct)} IN ${last - peakIndex} SESSIONS`, 'middle', 'loss-label');
+  text(x(peakIndex + (last - peakIndex) / 2), y(140),
+    `${fmt.pct0(drawdown.drawdown_pct)} IN ${last - peakIndex} SESSIONS`, 'middle', 'loss-label');
 
   // the unlock-trigger level, dashed, labelled in place (terms from supply.json)
   const trig = supply.trigger;
@@ -87,17 +91,20 @@ function buildPriceChart(c6) {
   svg.appendChild(triggerLine);
   const triggerLabel = text(PLOT.x1 - 4, y(trig.price) - 8, `UNLOCK TRIGGER ${fmt.usd2(trig.price)} · BEFORE 3 AUG`, 'end', 'loss-label');
 
-  // flags: the peak print and the NDX entry
-  const peakLabel = text(x(peakIndex), y(rows[peakIndex].close) - 16,
-    `PEAK ${fmt.usd2(rows[peakIndex].close)} · ${fmt.pct0(facts.aftermath.peak_gain_pct)}`, 'middle', 'em');
+  // flags: the peak close (the $225.64 headline figure was intraday, so the
+  // closing line peaks lower), then each dated flag from events.json
+  const peakClose = rows[peakIndex].close;
+  const peakLabel = text(x(peakIndex), y(peakClose) - 16,
+    `PEAK CLOSE ${fmt.usd2(peakClose)} · ${fmt.pct0((peakClose / daily.ipo_price - 1) * 100)}`, 'middle', 'em');
   const peakRing = svgEl('circle', { class: 'peak-ring', cx: points[peakIndex][0], cy: points[peakIndex][1], r: 8 });
   svg.appendChild(peakRing);
   const annos = [peakLabel, peakRing, triggerLine, triggerLabel];
-  const ndxIndex = rows.findIndex((r) => r.date === '2026-07-07');
-  if (ndxIndex !== -1) {
-    const flag = svgEl('line', { class: 'flag', x1: x(ndxIndex), y1: y(rows[ndxIndex].close) - 8, x2: x(ndxIndex), y2: PLOT.y0 + 14 });
+  for (const f of events.chart_flags) {
+    const i = rows.findIndex((r) => r.date === f.date);
+    if (i === -1) continue; // flag dated outside the series window
+    const flag = svgEl('line', { class: 'flag', x1: x(i), y1: y(rows[i].close) - 8, x2: x(i), y2: PLOT.y0 + 14 });
     svg.appendChild(flag);
-    annos.push(flag, text(x(ndxIndex) + 6, PLOT.y0 + 8, `NDX ENTRY · ~${fmt.bn1(facts.aftermath.ndx_inflows_bn)} PASSIVE BUYING`, 'end'));
+    annos.push(flag, text(x(i) + 6, PLOT.y0 + 8, f.label, 'end'));
   }
 
   // the line itself, then the reported prints as dots
@@ -106,13 +113,13 @@ function buildPriceChart(c6) {
   for (const i of [0, peakIndex, last]) {
     svg.appendChild(svgEl('circle', { class: 'anchor', cx: points[i][0], cy: points[i][1], r: 4 }));
   }
-  text(points[last][0] + 12, points[last][1] + 4, `${fmt.usd2(rows[last].close)} · 8 JUL`, 'start', 'em');
-  text(points[0][0] + 8, points[0][1] - 14, `$${rows[0].close.toFixed(2)} · DAY-ONE CLOSE`);
+  text(points[last][0] + 12, points[last][1] + 4, `${fmt.usd2(rows[last].close)} · ${day(rows[last].date)}`, 'start', 'em');
+  text(points[0][0] + 8, points[0][1] + 22, `$${rows[0].close.toFixed(2)} · DAY-ONE CLOSE`);
 
   // date ticks along the base: listing, peak, last
-  for (const [i, label] of [[0, '12 JUN'], [peakIndex, '24 JUN'], [last, '8 JUL']]) {
+  for (const i of [0, peakIndex, last]) {
     svg.appendChild(svgEl('line', { class: 'tick', x1: x(i), y1: PLOT.y1, x2: x(i), y2: PLOT.y1 + 6 }));
-    text(x(i), PLOT.y1 + 24, label, 'middle');
+    text(x(i), PLOT.y1 + 24, day(rows[i].date), 'middle');
   }
 
   c6.querySelector('#c6-price-chart').appendChild(svg);
@@ -132,8 +139,9 @@ function buildPriceChart(c6) {
   const notes = c6.querySelector('#c6-price-annotations');
   const stub = daily.is_stub ? ' · STUB DATA — RUN NOTEBOOK' : '';
   for (const s of [
-    `PEAK→TROUGH ${fmt.pct1(drawdown.drawdown_pct)} (REPORTED ~${fmt.pct0(drawdown.reported_drawdown_pct)})`,
-    `ANNUALISED VOL ${drawdown.annualised_vol_pct}%${stub}`,
+    `PEAK→TROUGH ${fmt.pct1(drawdown.drawdown_pct)} ON CLOSES (REPORTED ~${fmt.pct0(drawdown.reported_drawdown_pct)} FROM THE INTRADAY HIGH)`,
+    `ANNUALISED VOL ${drawdown.annualised_vol_pct}%` +
+      (drawdown.qqq_annualised_vol_pct ? ` · QQQ ${drawdown.qqq_annualised_vol_pct}%` : '') + stub,
   ]) {
     const p = document.createElement('p');
     p.className = 'mono';

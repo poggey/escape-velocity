@@ -2,11 +2,12 @@
    THE IMAGE MANIFEST — the only place in the codebase that knows
    about image files (build instruction 1).
 
-   Every image is currently a placeholder. To swap in a real one:
+   All six §12.5 images are generated and wired in. To swap one:
      1. generate it per whitepaper §12.5 (prompt + style suffix),
      2. drop the file into /public/images/,
-     3. change that image's `file: null` to e.g. '/images/img-01-hero.avif'.
-   One line. Nothing else references image paths.
+     3. point that image's `file` at it, e.g. '/images/img-01-hero.avif'.
+   One line. Nothing else references image paths. Set `file: null`
+   and the slot falls back to a labelled placeholder panel.
    ============================================================ */
 export const IMAGES = {
   // IMG-01 now backs C4 (the hero became the procedural launch scene)

@@ -1,2 +1,2 @@
-Generated images land here (see whitepaper §12.5 for prompts and grading).
-After dropping a file in, point its entry at it in src/lib/images.js.
+The six generated images (whitepaper §12.5 prompts, graded per §12.5).
+To swap one, drop the new file here and point its entry at it in src/lib/images.js.

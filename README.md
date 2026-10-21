@@ -1,6 +1,6 @@
 # Escape Velocity — The $1.77 Trillion Offering
 
-> **[PADRAIG: reflective note here — why I built this, what I'd do differently. Required by whitepaper §0.5. 3–5 sentences, first person.]**
+> I built this because the SpaceX listing was the biggest IPO there has ever been, and it was happening while I watched, so I could follow the fixed $135 price, the first trade and the slide afterwards as they happened rather than reading about them years later. My own read, on the record in C7.5, is that the valuation rests largely on promises, and whether Musk keeps them is unknown given his track record. As a piece of execution the $135 was roughly right, but the aftermarket traded the 'Musk Story' rather than the business, and outside Starlink not much of the price is 'real' yet. If I did it again, I'd wire in live prices from the first day instead of building on stub figures shaped to news reports; when the real data arrived, the peak turned out to be an intraday print from three sessions in, not the slow climb I'd sketched. The view stays up, dated 11 July 2026, whether it ages well or not.
 
 A scroll-driven editorial site about the SpaceX IPO of June 2026 — the mechanics, the numbers, the aftermath, and my own view of it. Built to the spec in `the-offering-whitepaper.md` with Vite, vanilla JavaScript and GSAP. No framework, no chart library: every line is meant to be explainable in an interview.
 
@@ -18,11 +18,10 @@ npm run build      # production build into /dist
 index.html                  All the words and structure. One <section> per chapter.
 data/                       Every figure on the site. Each JSON has "source" + "as_of".
   facts.json                Headline numbers ($135, 94x, +19.2%...) — edit here, site updates
-  spcx_daily.json           Daily prices (STUB until the notebook is run — see below)
+  spcx_daily.json           Daily SPCX prices, live from yfinance, 12 Jun – 10 Jul
   events.json               Deal timeline + chart flags + upcoming events
-  watch.json                The Watch: dated predictions (prediction dates are immutable)
   supply.json, money_left.json, drawdown.json, implied_growth.json   Analysis outputs
-  day_one_pops.json, ipo_records.json, comps.json, sources.json      Reference tables
+  day_one_pops.json, ipo_records.json, sources.json                  Reference tables
 src/main.js                 Entry point: fonts, styles, then each chapter in order
 src/chapters/               One file per chapter, each exporting one initChapter()
   c0-hero.js … c8-colophon.js, c75-position.js, interludes.js
@@ -39,7 +38,7 @@ src/lib/                    Small shared pieces (each used by 2+ chapters):
 styles/                     tokens.css (ALL colours/type/spacing) + base + components
                             + one small css file per chapter
 analysis/                   escape-velocity-analysis.ipynb + requirements.txt
-public/images/              Drop generated images here (empty until then)
+public/images/              The six generated §12.5 images
 ```
 
 ## How one chapter works, end to end (C3 · Breaking the Playbook)
@@ -62,13 +61,15 @@ jupyter lab escape-velocity-analysis.ipynb   # Run All
 
 The notebook fetches SPCX (and QQQ) via yfinance and rewrites the five analysis JSONs in `/data`. Reload the dev server — done.
 
-> **TODO: run the notebook to replace stub data with live data.** The repo currently ships `spcx_daily.json` and `drawdown.json` from the notebook's *fallback* path (marked `"is_stub": true`), hand-shaped to the whitepaper's reported anchor prices because SPCX wasn't fetchable at build time. The site labels stub-derived figures on screen.
+The price series stops at `SNAPSHOT_END = "2026-07-10"`, the last close before The Position's 11 July byline, so the piece stays a dated July snapshot. Move that one constant to extend it.
+
+If the fetch fails (no network, or a Jupyter kernel without `yfinance` installed), the notebook falls back to a stub series and marks it `"is_stub": true`, and the site labels every stub-derived figure on screen. Check that the first code cell prints `stub=False`.
 
 ## How to swap in an image
 
 1. Generate the image with its prompt + style suffix from whitepaper §12.5 (grade: desaturate, crush shadows to `#0A0A0C`, +4% grain, export 2400px AVIF/WebP).
 2. Drop the file into `public/images/`.
-3. In `src/lib/images.js`, change that image's `file: null` to `file: '/images/your-file.avif'`.
+3. In `src/lib/images.js`, point that image's `file` at it: `file: '/images/your-file.avif'`.
 
 That's the whole job — nothing else in the codebase references image paths.
 
@@ -90,12 +91,3 @@ That's the whole job — nothing else in the codebase references image paths.
 React, chart libraries, CSS frameworks, literal hex colours outside `tokens.css`, and numbers typed into code. If a figure is wrong, fix it in `/data`. If a colour is wrong, fix it in `tokens.css`.
 
 **One knowing deviation from the whitepaper's §14 rules, for the hero:** it uses colour (the sunrise palette, defined as tokens). The hero backdrop is a single hand-written WebGL fragment shader (`src/lib/ascent-scene.js`) — no three.js, no library — so the whole site stays well inside the 200KB JS budget. Everything after C0 is monochrome, GSAP-only, and hand-drawn.
-
-## Remaining TODOs (Padraig)
-
-- [ ] Run the analysis notebook against live data (replaces the stub JSONs).
-- [ ] Generate the six §12.5 images and wire them in `src/lib/images.js`.
-- [ ] Write predictions in `data/watch.json` and date-stamp `prediction_made` — before the events.
-- [ ] Verify raise figures for SoftBank / AIA / Visa / Facebook in `data/ipo_records.json` (null until sourced), and live comp multiples in `data/comps.json`.
-- [ ] Replace the portfolio link in the C8 footer, and write the reflective note at the top of this README.
-- [ ] Point the C8 "analysis" link at the real repo URL once pushed.

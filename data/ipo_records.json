@@ -1,14 +1,14 @@
 {
-  "source": "the-offering-whitepaper.md §5, §9",
+  "source": "the-offering-whitepaper.md §5, §9; SoftBank, AIA, Visa and Facebook from contemporaneous Reuters / FinanceAsia / SEC reporting",
   "as_of": "2026-07-08",
-  "note": "Only whitepaper-sourced figures included. TODO (Padraig): verify SoftBank / AIA / Visa / Facebook raise figures before adding them — do not display null rows.",
+  "note": "All raises include the greenshoe / over-allotment, to match SPCX's $86bn.",
   "records": [
     { "name": "SPCX", "year": 2026, "raise_bn": 86, "detail": "incl. greenshoe", "highlight": true },
     { "name": "SAUDI ARAMCO", "year": 2019, "raise_bn": 29.4 },
     { "name": "ALIBABA", "year": 2014, "raise_bn": 25 },
-    { "name": "SOFTBANK", "year": null, "raise_bn": null },
-    { "name": "AIA", "year": null, "raise_bn": null },
-    { "name": "VISA", "year": null, "raise_bn": null },
-    { "name": "FACEBOOK", "year": 2012, "raise_bn": null }
+    { "name": "SOFTBANK", "year": 2018, "raise_bn": 23.5 },
+    { "name": "AIA", "year": 2010, "raise_bn": 20.5 },
+    { "name": "VISA", "year": 2008, "raise_bn": 19.7 },
+    { "name": "FACEBOOK", "year": 2012, "raise_bn": 18.4 }
   ]
 }

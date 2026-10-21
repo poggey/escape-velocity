@@ -12,8 +12,7 @@
     { "date": "2026-06-12", "label": "First trade" }
   ],
   "chart_flags": [
-    { "date": "2026-06-24", "label": "PEAK $225.64 · +67%", "kind": "peak" },
-    { "date": "2026-07-07", "label": "NDX ENTRY · ~$4.3BN PASSIVE", "kind": "flag" }
+    { "date": "2026-07-07", "label": "NDX ENTRY · ~$4.3BN PASSIVE BUYING", "kind": "flag" }
   ],
   "upcoming": [
     { "date": "2026-07-27", "label": "CME single-stock futures begin" },

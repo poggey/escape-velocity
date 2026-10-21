@@ -1,13 +1,13 @@
 {
-  "source": "STUB \u2014 computed from the stub spcx_daily.json series. Whitepaper reports ~-32% from the $225.64 peak; run the notebook for live figures. QQQ comparison requires live data (null until then).",
-  "as_of": "2026-07-08",
-  "is_stub": true,
-  "peak": 225.64,
-  "peak_date": "2026-06-24",
-  "trough": 149.5,
-  "drawdown_pct": -33.7,
+  "source": "Computed from spcx_daily.json. Computed on daily closes; the whitepaper's ~-32% is measured from the $225.64 intraday high.",
+  "as_of": "2026-07-10",
+  "is_stub": false,
+  "peak": 211.39,
+  "peak_date": "2026-06-16",
+  "trough": 145.3,
+  "drawdown_pct": -31.3,
   "reported_drawdown_pct": -32,
-  "daily_vol_pct": 5.16,
-  "annualised_vol_pct": 81.9,
-  "qqq_annualised_vol_pct": null
+  "daily_vol_pct": 7.9,
+  "annualised_vol_pct": 125.5,
+  "qqq_annualised_vol_pct": 29.1
 }

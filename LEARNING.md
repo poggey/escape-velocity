@@ -22,9 +22,10 @@ Listing Day pins for `end: '+=150%'` — one-and-a-half viewport-heights of scro
 ## 4 · Swap an image and regrade it
 
 **Files:** `public/images/` + `src/lib/images.js`
-Generate IMG-04 (the booster catch — prompt in whitepaper §12.5, including the style suffix), grade it (desaturate, shadows to `#0A0A0C`, +4% grain), drop it in `public/images/`, and change one line in `images.js` from `file: null` to the path. Reload: the interlude placeholder becomes a photograph, and the scale-drift parallax starts working on a real image.
+Regenerate IMG-04 (the booster catch — prompt in whitepaper §12.5, including the style suffix), grade it (desaturate, shadows to `#0A0A0C`, +4% grain), drop it in `public/images/`, and point IMG-04's `file` in `images.js` at the new path. Reload: the interlude shows your version, parallax and all. Then set it to `file: null` and watch the slot fall back to a labelled placeholder — that fallback is why a missing image never breaks the layout.
 
-## 5 · Put a prediction on the record
+## 5 · Move the snapshot date
 
-**Files:** `data/watch.json`
-Write your actual expectation for the 6 August earnings into the `prediction` field, and set `prediction_made` to today's date. Reload C7.5 and see "PREDICTION NOT YET DATED" become your date-stamp. Rule to internalise (§0.5-R2): after today, that date **never changes** — when the event resolves you append `outcome` and `outcome_date`, and you never edit the prediction, especially if it was wrong. Wrong-but-dated beats right-but-retrofitted.
+**Files:** `analysis/escape-velocity-analysis.ipynb` + nothing in `/src`.
+The site's prices stop at the 10 July close because The Position is on the record as of 11 July. Change `SNAPSHOT_END` to a later date, Run All, and reload: the C6 chart's date ticks, peak and last-close labels, the drawdown and volatility notes, and the C7.5 "last close" all follow, with no code edited. Now read the C7.5 byline next to that new last close and you'll see why it's pinned: a dated view has to sit next to the data it was written against. Put `SNAPSHOT_END` back to `"2026-07-10"` and re-run.
+*The lesson:* one date in one place, and the whole site follows it.

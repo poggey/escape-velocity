@@ -1,11 +1,11 @@
 {
-  "source": "Computed per whitepaper \u00a710.3: required EBITDA = EV / exit multiple; CAGR from $6.6bn 2025 adjusted EBITDA over 5 years. EV uses the $1.77tn offering-valuation share base (see valuation-vs-market-cap discrepancy, \u00a716).",
-  "as_of": "2026-07-08",
+  "source": "Computed per whitepaper \u00a710.3: required EBITDA = EV / exit multiple; CAGR from $6.6bn 2025 adjusted EBITDA over 5 years. EV uses the $1.77tn offering-valuation share base (see \u00a716 discrepancy register).",
+  "as_of": "2026-07-10",
   "ebitda_2025_bn": 6.6,
   "horizon_years": 5,
   "bases": {
     "at_ipo_price": {
-      "price": 135,
+      "price": 135.0,
       "ev_bn": 1770.0,
       "scenarios": [
         {
@@ -41,38 +41,38 @@
       ]
     },
     "at_last_price": {
-      "price": 149.5,
-      "ev_bn": 1960.0,
+      "price": 145.3,
+      "ev_bn": 1905.0,
       "scenarios": [
         {
           "exit_multiple": 15,
-          "required_ebitda_2030_bn": 130.7,
-          "implied_ebitda_cagr_pct": 81.7
+          "required_ebitda_2030_bn": 127.0,
+          "implied_ebitda_cagr_pct": 80.7
         },
         {
           "exit_multiple": 20,
-          "required_ebitda_2030_bn": 98.0,
-          "implied_ebitda_cagr_pct": 71.5
+          "required_ebitda_2030_bn": 95.3,
+          "implied_ebitda_cagr_pct": 70.6
         },
         {
           "exit_multiple": 25,
-          "required_ebitda_2030_bn": 78.4,
-          "implied_ebitda_cagr_pct": 64.0
+          "required_ebitda_2030_bn": 76.2,
+          "implied_ebitda_cagr_pct": 63.1
         },
         {
           "exit_multiple": 30,
-          "required_ebitda_2030_bn": 65.3,
-          "implied_ebitda_cagr_pct": 58.2
+          "required_ebitda_2030_bn": 63.5,
+          "implied_ebitda_cagr_pct": 57.3
         },
         {
           "exit_multiple": 40,
-          "required_ebitda_2030_bn": 49.0,
-          "implied_ebitda_cagr_pct": 49.3
+          "required_ebitda_2030_bn": 47.6,
+          "implied_ebitda_cagr_pct": 48.5
         },
         {
           "exit_multiple": 50,
-          "required_ebitda_2030_bn": 39.2,
-          "implied_ebitda_cagr_pct": 42.8
+          "required_ebitda_2030_bn": 38.1,
+          "implied_ebitda_cagr_pct": 42.0
         }
       ]
     }

@@ -43,16 +43,6 @@
   max-width: 20ch;
 }
 
-.c75 .placeholder-text {
-  background: var(--surface);
-  border: 1px dashed var(--hairline-l);
-  padding: 20px 24px;
-  color: var(--muted);
-  font-style: italic;
-  margin: 24px 0;
-  max-width: 62ch;
-}
-
 /* ---- implied-growth interactive: a dark instrument panel set into the
    light page — the hero's night sky powering the site's one calculator ---- */
 .c75__calc {

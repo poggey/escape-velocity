@@ -1,8 +1,8 @@
 {
   "source": "Computed: 555,555,555 shares x ($160.95 - $135). Whitepaper \u00a710.1.",
-  "as_of": "2026-07-08",
+  "as_of": "2026-07-10",
   "shares": 555555555,
-  "ipo_price": 135,
+  "ipo_price": 135.0,
   "day_one_close": 160.95,
   "left_on_table_bn": 14.4,
   "underpricing_pct": 19.2,
